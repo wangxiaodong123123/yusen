@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>   
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="11"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:background="@drawable/create_bg"
+    android:id="@+id/layout_bg">
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.95"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent"
+            />
+		 <TextView 
+	        android:textSize="25.0dp" 
+			android:layout_width="0dp" 
+			android:layout_weight="9.3"
+			android:layout_height="match_parent"
+			android:textColor="@color/title"
+			android:text="搅拌时间浏览或选择"
+			android:gravity="center_vertical"
+		/>
+	 </LinearLayout>
+	 <GridView 
+	    android:id="@+id/mixdate_gridview_id"   
+	    android:layout_width="fill_parent"     
+	    android:layout_height="0dp"
+        android:layout_weight="10.05"  
+	    android:columnWidth="150dp" 
+	    android:numColumns="auto_fit"   
+	    android:verticalSpacing="5dp"   
+	    android:horizontalSpacing="5dp"   
+	    android:stretchMode="columnWidth"  
+	    android:layout_marginTop="10dip" 
+	    android:gravity="center"    
+	     >
+	 </GridView>
+</LinearLayout>

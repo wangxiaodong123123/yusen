@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:weightSum="10"
+    android:orientation="vertical" 
+    android:background="@drawable/cloud_bg">
+     <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent"
+            />
+        <TextView 
+	        android:textSize="25sp" 
+			android:layout_width="0dp" 
+			android:layout_weight="6.3"
+			android:layout_height="match_parent" 
+			android:textColor="@color/title"
+			android:id="@+id/dev_list_title"
+			android:gravity="center_vertical"
+		/>  
+		<TextView
+		    android:layout_width="0dp"
+		    android:layout_weight="3" 
+			android:layout_height="match_parent" 
+		    android:textSize="25sp"
+		    android:id="@+id/user_info"
+		    android:gravity="center"
+		    android:textColor="@color/title"
+		/>
+    </LinearLayout>
+    
+    <RelativeLayout 	
+        android:id="@+id/panel_relativelayout"	
+		android:layout_width="fill_parent" 
+		android:layout_height="50dp"
+		android:layout_marginLeft="10dip"
+		android:layout_marginTop="20dip"
+		android:layout_marginRight="10dip"
+		>   
+	<ImageView 
+	    android:id="@+id/panel_imageview"
+	    android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:background="@drawable/item_sel"
+		android:visibility="visible"
+	    />
+    <TextView 
+		        android:textSize="22sp" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="搅拌机参数下载"
+				android:textColor="@android:color/white"
+				android:layout_centerVertical="true"/> 
+				
+    
+    </RelativeLayout>	
+    
+	 <RelativeLayout 	
+	     android:id="@+id/sdcard_relativelayout"		
+		android:layout_width="fill_parent" 
+		android:layout_marginTop="10dip"
+		android:layout_height="50dp"
+		android:layout_marginLeft="10dp"
+		>   
+		<ImageView 
+		android:id="@+id/sdcard_imageview"
+	    	android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:background="@drawable/item_sel"
+		android:visibility="gone"
+	    />
+    <TextView 
+		        	android:textSize="22sp" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="搅拌数据下载"
+				android:layout_centerVertical="true"
+				android:textColor="@android:color/white"/> 
+				
+   
+    </RelativeLayout>	
+
+</LinearLayout>

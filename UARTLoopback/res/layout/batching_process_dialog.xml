@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout  
+  xmlns:android="http://schemas.android.com/apk/res/android"  
+  android:layout_width="match_parent"  
+  android:layout_height="match_parent"
+  android:orientation="vertical"> 
+        <TextView 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="工艺文件数："
+      android:textSize="20sp"
+      /> 
+  <EditText  
+        android:id="@+id/copy_file_nums_et"  
+        android:layout_width="match_parent"  
+        android:layout_height="50dp"    
+  /> 
+  <TextView 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="工段间隔："
+      android:textSize="20sp"
+      /> 
+   <EditText  
+        android:id="@+id/mileage_gap_et"  
+        android:layout_width="match_parent"  
+        android:layout_height="50dp"    
+  /> 
+</LinearLayout> 

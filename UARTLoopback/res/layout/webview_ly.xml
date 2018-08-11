@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center"
+	android:background="@drawable/cloud_bg"
+	>
+	<TextView 
+        android:textSize="20sp" 
+		android:layout_width="fill_parent" 
+		android:layout_height="50dip" 
+		android:textColor="@color/title"
+		android:paddingLeft="70dip"
+		android:paddingTop="15dip"
+		android:text="云服务->修改工艺文件"
+	/> 
+	<WebView 
+	    android:layout_width="fill_parent" 
+		android:layout_height="match_parent" 
+		android:id="@+id/webview_id"
+	    />
+</LinearLayout>
