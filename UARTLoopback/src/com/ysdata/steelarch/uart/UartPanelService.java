@@ -608,7 +608,7 @@ public class UartPanelService {
     	int check_sum = 0;
     	AppUtil.log( "data check start: cmd " + cmd);
     	if ((data_head == Format.PANEL_HEAD) && (data_break == Format.PANEL_BREAK)) {
-    		if (cmd > 10 || (SetCmd != 0xff && SetCmd != cmd)) {
+    		if (SetCmd != 0xff && SetCmd != cmd) {
     			AppUtil.log( "cmd check failed");
     			return false;
     		}
@@ -631,39 +631,6 @@ public class UartPanelService {
     		return false;
     	}
     }
-    
-/*    private boolean dataCheck(int[] data, int length) {
-		int data_head = data[0];
-		int data_break = data[1];
-		int cmd = data[2];
-		int data_length = (data[3] << 8) + data[4];
-		int check_sum = 0;
-		AppUtil.log( "data check start: cmd " + cmd);
-		if ((data_head == Format.PANEL_HEAD) && (data_break == Format.PANEL_BREAK)) {
-			
-			if (cmd > 10) {
-				AppUtil.log( "cmd check failed");
-				return false;
-			}
-			
-			if (data_length != length - 7) {
-				AppUtil.log( "data len check failed. data_full_len:"+length+"  data_len:"+data_length);
-				length = data_length+7;
-			}
-			
-			check_sum = getCrcCheckSum(length - 2, data);
-    		
-    		if (check_sum != ((data[length-2] << 8) | data[length-1])) {
-    			AppUtil.log( "check_sum check failed");
-    			return false;
-    		}
-			
-			AppUtil.log( "data check success.");
-			return true;
-		} else {
-			return false;
-		}
-	}*/
     
     private float IntToPoint(int data) {
     	if (data < 10)

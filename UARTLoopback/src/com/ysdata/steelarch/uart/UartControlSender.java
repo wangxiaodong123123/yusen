@@ -480,7 +480,7 @@ public class UartControlSender {
     	int check_sum = 0;
     	AppUtil.log( "data check start: cmd " + cmd);
     	if ((data_head == Format.PANEL_HEAD) && (data_break == Format.PANEL_BREAK)) {
-    		if (cmd > 8 || (SetCmd != 0xff && SetCmd != cmd)) {
+    		if (SetCmd != 0xff && SetCmd != cmd) {
     			AppUtil.log( "cmd check failed");
     			return false;
     		}
