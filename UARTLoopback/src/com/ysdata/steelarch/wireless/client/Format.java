@@ -54,7 +54,7 @@ public class Format {
 //	public final static int CMD_COMM_CONTROL_ACK = 0x06;
 	public final static int CMD_CRAFT_PARAMETER = 0x09; //传每根锚杆注浆工艺参数
 	public final static int CMD_SYSTEM_INFO = 0x06; //system_time / proj / eng
-	public final static int CMD_COMM_STOP = 0x10;  //向控制面板传送锚杆数据结束
+	public final static int CMD_COMM_STOP = 0x0a;  //向控制面板传送锚杆数据结束
 	public final static int CMD_REQUEST_PRJ_ENG = 0x09; //请求传线路，工程名称
 	
 	/* 平板与读写器数据传输
