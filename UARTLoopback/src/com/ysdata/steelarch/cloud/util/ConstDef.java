@@ -20,7 +20,10 @@ public class ConstDef {
 	public static int SYNCTIME_TYPE_CONTRACTSECTION = 1;
 	public static int SYNCTIME_TYPE_SUBPROJECT = 2;
 	public static int SYNCTIME_TYPE_SUBPROJECTSECTION = 3;
-	public static int SYNCTIME_TYPE_BLENDER_DATA = 4;
+	public static int SYNCTIME_TYPE_STEELARCH_DEL_DATA = 4;
+	public static int SYNCTIME_TYPE_STEELARCH_CRAFT_DATA = 5;
+	public static int SYNCTIME_TYPE_STEELARCH_COLLECT_DATA = 6;
+	public static int SYNCTIME_TYPE_BLENDER_DATA = 10;
 	
 	public static String SYNCTIME_NAME_CONTRACTSECTION = "";
 	

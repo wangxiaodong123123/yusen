@@ -32,7 +32,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RxMixParamterActivity extends Activity{
+public class RxSteelArchParamterActivity extends Activity{
 	
 	private final int START_CONNECT = 0;
 	private final int SUCCESS_CONNECT = 2;
@@ -58,14 +58,12 @@ public class RxMixParamterActivity extends Activity{
 	String eng_name;
 	String proj_name;
 	int click_event = 0;
-	String upload_end_mixdate;
 	Activity activity;
 	private int rx_end_steelarch_orderno = 0;
 	
 	String proj_name_string = "";
 	String eng_name_string = "";
 	
-	int mix_counts = 0;
 	int steelarch_orderno = 0;
 	boolean isLeft = true;
 	int pic_length = 0;
@@ -78,8 +76,8 @@ public class RxMixParamterActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rx_tx_mix_data);
 		context = this;
-		MyActivityManager.addActivity(RxMixParamterActivity.this);
-		activity = RxMixParamterActivity.this;
+		MyActivityManager.addActivity(RxSteelArchParamterActivity.this);
+		activity = RxSteelArchParamterActivity.this;
 		title_tv = (TextView) findViewById(R.id.title);
 		title_tv.setText("钢拱架数据采集");
 		dev_connect_status_tv = (TextView) findViewById(R.id.dev_connect_status);
@@ -102,6 +100,7 @@ public class RxMixParamterActivity extends Activity{
         filter.addAction(Format.ENG_MATCH);
         filter.addAction(Format.ENG_NOT_MATCH);
         filter.addAction(Format.REQUEST_TRANSFER_DATA_SUCCESS);
+        filter.addAction(Format.RECV_STEELARCH_DATA);
         filter.addAction(Format.RECV_ENTRANCE_PIC);
         filter.addAction(Format.RECV_TUNNELFACE_PIC);
         filter.addAction(Format.STEELARCH_COMM_FINISH);
@@ -116,10 +115,10 @@ public class RxMixParamterActivity extends Activity{
 	EditText end_mileage1;
 	EditText end_mileage2;
 	private void ParameterInputDialog() {
-		LayoutInflater factory = LayoutInflater.from(RxMixParamterActivity.this);
+		LayoutInflater factory = LayoutInflater.from(RxSteelArchParamterActivity.this);
 		final View dialogView = factory.inflate(R.layout.panel_mileage_param_dialog, null);
 		dialogView.findViewById(R.id.grout_priority_ly).setVisibility(View.GONE);
-		AlertDialog.Builder dlg = new AlertDialog.Builder(RxMixParamterActivity.this);
+		AlertDialog.Builder dlg = new AlertDialog.Builder(RxSteelArchParamterActivity.this);
     	dlg.setTitle("选择要采集的起止钢拱架");
     	dlg.setView(dialogView);
     	final Spinner dlg_proj_spinner = (Spinner) dialogView.findViewById(R.id.proj_name_dlg_id);
@@ -141,7 +140,7 @@ public class RxMixParamterActivity extends Activity{
 		for (int i = 0; i < proj_list_size; i++) {
 			proj_areas[i] = prj_list.get(i);
 		}
-		proj_adapter = new ArrayAdapter<String>(RxMixParamterActivity.this, android.R.layout.simple_spinner_item, proj_areas);
+		proj_adapter = new ArrayAdapter<String>(RxSteelArchParamterActivity.this, android.R.layout.simple_spinner_item, proj_areas);
 		proj_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		dlg_proj_spinner.setAdapter(proj_adapter);
 		dlg_proj_spinner.setSelection(0);
@@ -156,7 +155,7 @@ public class RxMixParamterActivity extends Activity{
 				for (int i = 0; i < eng_list_size; i++) {
 					eng_areas[i] = eng_list.get(i);
 				}
-				eng_adapter = new ArrayAdapter<String>(RxMixParamterActivity.this, android.R.layout.simple_spinner_item, eng_areas);
+				eng_adapter = new ArrayAdapter<String>(RxSteelArchParamterActivity.this, android.R.layout.simple_spinner_item, eng_areas);
 				eng_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				dlg_eng_spinner.setAdapter(eng_adapter);
 				dlg_eng_spinner.setSelection(0);
@@ -214,7 +213,7 @@ public class RxMixParamterActivity extends Activity{
 					if (dlg_eng_spinner.getSelectedItem() != null) {
 						click_event = CLICK_START_STEELARCH_EVENT;
 						subproject_name = dlg_eng_spinner.getSelectedItem().toString();
-						Intent intent = new Intent(RxMixParamterActivity.this, SteelArchGridViewActivity.class);
+						Intent intent = new Intent(RxSteelArchParamterActivity.this, SteelArchGridViewActivity.class);
 						intent.putExtra("project_name", project_name);
 						intent.putExtra("subproject_name", subproject_name);
 						startActivity(intent);
@@ -237,7 +236,7 @@ public class RxMixParamterActivity extends Activity{
 					if (dlg_eng_spinner.getSelectedItem() != null) {
 						click_event = CLICK_END_STEELARCH_EVENT;
 						subproject_name = dlg_eng_spinner.getSelectedItem().toString();
-						Intent intent = new Intent(RxMixParamterActivity.this, SteelArchGridViewActivity.class);
+						Intent intent = new Intent(RxSteelArchParamterActivity.this, SteelArchGridViewActivity.class);
 						intent.putExtra("project_name", project_name);
 						intent.putExtra("subproject_name", subproject_name);
 						startActivity(intent);
@@ -433,7 +432,7 @@ public class RxMixParamterActivity extends Activity{
     			text_status.setText("准备接收数据......");
     		} else if (action.equals(Format.RECV_STEELARCH_DATA)) {
     			status = DATA_TRANSFERING;
-    			steelarch_orderno = intent.getIntExtra("steelarch_orderno", 0);
+    			steelarch_orderno = intent.getIntExtra("steelarch_orderno_g", 0);
     			String date = intent.getStringExtra("date");
     			String name = intent.getStringExtra("name");
     			isLeft = intent.getBooleanExtra("isLeft", true);
@@ -541,7 +540,7 @@ public class RxMixParamterActivity extends Activity{
     	if (mProjectPointBase != null) {
     		mProjectPointBase.closeDb();
     	}
-    	MyActivityManager.removeActivity(RxMixParamterActivity.this);
+    	MyActivityManager.removeActivity(RxSteelArchParamterActivity.this);
     	super.onDestroy();
     }
 	

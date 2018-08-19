@@ -210,6 +210,7 @@ public class UartPanelService {
     }
     
     private void startService() {
+    	sendStart = true;
 		requestPrjEng = false;
 		requestComm = false;
 		waitPrjEngAckOK = false;
@@ -957,7 +958,6 @@ public class UartPanelService {
 									try {
 										//搅拌序号
 										steelarch_orderno_g = (recv_data[index++] << 16) + (recv_data[index++] << 8) + recv_data[index++];
-										AppUtil.log("steelarch_orderno_g:"+steelarch_orderno_g);
 										//搅拌日期
 										int year = (recv_data[index++] << 8) + recv_data[index++];
 										int month = recv_data[index++];
@@ -1040,9 +1040,9 @@ public class UartPanelService {
 										isLeft = (byte) recv_data[index++] == 0 ? true : false;
 										
 										sendAck(cmd); //接收到正确数据，发送数据接收应答
-										
+										AppUtil.log("steelarch_orderno_g:"+steelarch_orderno_g);
 										Intent intent = new Intent(Format.RECV_STEELARCH_DATA);
-										intent.putExtra("steelarch_orderno", steelarch_orderno_g);
+										intent.putExtra("steelarch_orderno_g", steelarch_orderno_g);
 										intent.putExtra("date", date.toString());
 										intent.putExtra("name", name_string);
 										intent.putExtra("isLeft", isLeft);
@@ -1165,7 +1165,7 @@ public class UartPanelService {
 							} else if (cmd == Format.CMD_STEELARCH_COMM_STOP) {
 								AppUtil.log( "recv CMD_RECEV_STOP");
 								if (mProjectPointBase.openDb(proj_val, eng_val)) {
-									mProjectPointBase.setCollectOrderNo();
+									mProjectPointBase.setSteelArchOrderNo();
 								}
 								sendAck(cmd); //接收到正确数据，发送数据接收应答
 								context.sendBroadcast(new Intent(Format.STEELARCH_COMM_FINISH));

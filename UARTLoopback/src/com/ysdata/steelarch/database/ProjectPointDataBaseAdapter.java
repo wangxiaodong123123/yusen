@@ -506,6 +506,7 @@ public class ProjectPointDataBaseAdapter {
     	if (!isOpen) return null;
     	Cursor cursor =  mDb.rawQuery("select * from " + STEELARCH_DATA_TABLE + 
     			" where " + STEELARCH_ORDERNO + "=" + orderno, null);
+    	java.text.DecimalFormat   df   =new   java.text.DecimalFormat("##.##"); 
     	if (cursor.moveToNext()) {
     		String entry_mileage = "k100 + 90";
     		double left_steelarch_to_tunnelface_distance = cursor.getDouble(VOLUME_COLLECT_LEFT_STEELARCH_TO_TUNNELFACE_DISTANCE);
@@ -542,9 +543,11 @@ public class ProjectPointDataBaseAdapter {
     		else 
     			AppUtil.log("left_pic_dir_tunnelface is null");
     		return new SteelArchDetailParameter(orderno, "", left_date, right_date, entry_mileage, 
-    				0, steelarch_to_tunnel_entrance_distance, left_time, 
-    				left_measure_distance, left_steelarch_to_tunnelface_distance, right_time, 
-    				right_measure_distance, right_steelarch_to_tunnelface_distance,
+    				0, Double.parseDouble(df.format(steelarch_to_tunnel_entrance_distance)), left_time, 
+    				Double.parseDouble(df.format(left_measure_distance)), 
+    				Double.parseDouble(df.format(left_steelarch_to_tunnelface_distance)), right_time, 
+    				Double.parseDouble(df.format(right_measure_distance)), 
+    				Double.parseDouble(df.format(right_steelarch_to_tunnelface_distance)),
     				left_pic_dir_tunnelentry, left_pic_dir_tunnelface, 
     				right_pic_dir_tunnelentry, right_pic_dir_tunnelface);
     	}
@@ -600,6 +603,11 @@ public class ProjectPointDataBaseAdapter {
     	if (!isOpen) return;
 		mDb.delete(STEELARCH_DATA_TABLE, null, null);
     }
+    
+    public void deleteSteelArchData(int orderno) {
+    	if (!isOpen) return;
+    	mDb.delete(STEELARCH_DATA_TABLE, STEELARCH_ORDERNO + "=" + orderno, null);
+    }    
     
     public void deleteAllBlenderDataRecord() {
     	if (!isOpen) return;
@@ -669,8 +677,10 @@ public class ProjectPointDataBaseAdapter {
     		double secondcar_to_tunnelface_distance = (cursor.getDouble(VOLUME_COLLECT_LEFT_SECONDCAR_TO_STEELARCH_DISTANCE)
     				+ cursor.getDouble(VOLUME_COLLECT_RIGHT_SECONDCAR_TO_STEELARCH_DISTANCE)) / 2 
     				+ cursor.getDouble(VOLUME_CRAFT_SECOND_CAR_WIDTH);
-    		list.add(new ManagerCraftParameter(orderno, name, Double.parseDouble(df.format(design_distance)), steelarch_to_steelarch_distance, 
-    				secondcar_to_tunnelface_distance, steelarch_to_tunnelface_distance));
+    		list.add(new ManagerCraftParameter(orderno, name, Double.parseDouble(df.format(design_distance)), 
+    				Double.parseDouble(df.format(steelarch_to_steelarch_distance)), 
+    				Double.parseDouble(df.format(secondcar_to_tunnelface_distance)), 
+    				Double.parseDouble(df.format(steelarch_to_tunnelface_distance))));
     	}
     	if (cursor != null) cursor.close();
     }
@@ -679,6 +689,7 @@ public class ProjectPointDataBaseAdapter {
     	list.clear();
     	Cursor cursor =  mDb.rawQuery("select * from " + STEELARCH_DATA_TABLE+ " order by " 
     						+ STEELARCH_ORDERNO + " asc", null);
+    	java.text.DecimalFormat   df   =new   java.text.DecimalFormat("##.##");
     	while (cursor.moveToNext()) {
     		int id = cursor.getInt(VOLUME_STEELARCH_ORDERNO);
     		String name = cursor.getString(VOLUME_STEELARCH_NAME); 
@@ -696,8 +707,9 @@ public class ProjectPointDataBaseAdapter {
     		double secondcar_to_tunnelface_distance = (cursor.getDouble(VOLUME_COLLECT_LEFT_SECONDCAR_TO_STEELARCH_DISTANCE)
     				+ cursor.getDouble(VOLUME_COLLECT_RIGHT_SECONDCAR_TO_STEELARCH_DISTANCE)) / 2 
     				+ cursor.getDouble(VOLUME_CRAFT_SECOND_CAR_WIDTH);
-    		list.add(new DdSteelArchDataParameter(id, name, date, steelarch_to_steelarch_distance, 
-    				secondcar_to_tunnelface_distance, steelarch_to_tunnelface_distance));
+    		list.add(new DdSteelArchDataParameter(id, name, date, Double.parseDouble(df.format(steelarch_to_steelarch_distance)), 
+    				Double.parseDouble(df.format(secondcar_to_tunnelface_distance)), 
+    				Double.parseDouble(df.format(steelarch_to_tunnelface_distance))));
     	}
     	if (cursor != null) cursor.close();
     }
@@ -915,6 +927,72 @@ public class ProjectPointDataBaseAdapter {
 		value.put(COLLECT_RIGHT_STEELARCH_TO_SECONDCAR_DISTANCE, secondcar_to_steelarch_distance);
 		mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ORDERNO+" = " + orderno, null);
     }
+    
+    public void updateSteelArchCollectLeftPicDirEntranceWhereId(int id, String pic_string) {
+    	if (!isOpen) return;
+    	ContentValues value = new ContentValues();
+    	AppUtil.log("=========updateSteelArchCollectLeftPicDirEntranceWhereId=========");
+    	AppUtil.log("pic_string:");
+    	AppUtil.log(pic_string);
+    	AppUtil.log("=========updateSteelArchCollectLeftPicDirEntranceWhereId=========");
+    	value.put(COLLECT_LEFT_PIC_DIR_ENTRANCE, pic_string);
+    	mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID + "=" + id, null);
+    }
+    
+    public void updateSteelArchCollectRightPicDirEntranceWhereId(int id, String pic_string) {
+    	if (!isOpen) return;
+    	ContentValues value = new ContentValues();
+    	AppUtil.log("=========updateSteelArchCollectRightPicDirEntranceWhereId=========");
+    	AppUtil.log("pic_string:");
+    	AppUtil.log(pic_string);
+    	AppUtil.log("=========updateSteelArchCollectRightPicDirEntranceWhereId=========");
+    	value.put(COLLECT_RIGHT_PIC_DIR_ENTRANCE, pic_string);
+    	mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID + "=" + id, null);
+    }
+    
+    public void updateSteelArchCollectLeftPicDirTunnelFaceWhereId(int id, String pic_string) {
+    	if (!isOpen) return;
+    	ContentValues value = new ContentValues();
+    	AppUtil.log("=========updateSteelArchCollectLeftPicDirTunnelFaceWhereId=========");
+    	AppUtil.log("pic_string:");
+    	AppUtil.log(pic_string);
+    	AppUtil.log("=========updateSteelArchCollectLeftPicDirTunnelFaceWhereId=========");
+    	value.put(COLLECT_LEFT_PIC_DIR_TUNNELFACE, pic_string);
+    	mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID + "=" + id, null);
+    }
+    
+    public void updateSteelArchCollectRightPicDirTunnelFaceWhereId(int id, String pic_string) {
+    	if (!isOpen) return;
+    	ContentValues value = new ContentValues();
+    	AppUtil.log("=========updateSteelArchCollectRightPicDirTunnelFaceWhereId=========");
+    	AppUtil.log("pic_string:");
+    	AppUtil.log(pic_string);
+    	AppUtil.log("=========updateSteelArchCollectRightPicDirTunnelFaceWhereId=========");
+    	value.put(COLLECT_RIGHT_PIC_DIR_TUNNELFACE, pic_string);
+    	mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID + "=" + id, null);
+    }
+    
+    public void updateSteelArchCollectLeftParameterWhereId(int id, String date, double steelarch_to_steelarch_distance,
+    		double secondcar_to_steelarch_distance) {
+    	if (!isOpen) return;
+    	AppUtil.log( "========updateSteelArchCollectLeftParameterWhereId=======");
+    	ContentValues value = new ContentValues();
+		value.put(COLLECT_LEFT_MEASURE_DATE, date);
+		value.put(COLLECT_LEFT_STEELARCH_TO_STEELARCH_DISTANCE, steelarch_to_steelarch_distance);
+		value.put(COLLECT_LEFT_STEELARCH_TO_SECONDCAR_DISTANCE, secondcar_to_steelarch_distance);
+		mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID+" = " + id, null);
+    }
+    
+    public void updateSteelArchCollectRightParameterWhereId(int id, String date, double steelarch_to_steelarch_distance,
+    		double secondcar_to_steelarch_distance) {
+    	if (!isOpen) return;
+    	AppUtil.log( "========updateSteelArchCollectRightParameterWhereId=======");
+    	ContentValues value = new ContentValues();
+		value.put(COLLECT_RIGHT_MEASURE_DATE, date);
+		value.put(COLLECT_RIGHT_STEELARCH_TO_STEELARCH_DISTANCE, steelarch_to_steelarch_distance);
+		value.put(COLLECT_RIGHT_STEELARCH_TO_SECONDCAR_DISTANCE, secondcar_to_steelarch_distance);
+		mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID+" = " + id, null);
+    }    
     
     public void updateMixCollectPicScene(int id, String pic_string) {
     	if (!isOpen) return;

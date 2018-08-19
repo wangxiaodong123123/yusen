@@ -36,6 +36,12 @@ public final class SteelArchCollectData {
 	public int id;
 	
 	/**
+	 * 钢拱架里程编号
+	 * */
+	@SerializedName("name")
+	public String name;
+	
+	/**
 	 * 左侧测量日期
 	 * */
 	@SerializedName("leftMeasureDate")

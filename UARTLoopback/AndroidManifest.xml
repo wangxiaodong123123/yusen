@@ -165,7 +165,7 @@
           	android:screenOrientation="landscape"
           	/>	   
           <activity
-          	android:name="com.ysdata.steelarch.activity.RxMixParamterActivity"
+          	android:name="com.ysdata.steelarch.activity.RxSteelArchParamterActivity"
           	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
           	android:screenOrientation="landscape"
           	/>	 

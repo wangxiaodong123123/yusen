@@ -15,6 +15,8 @@ import com.ysdata.steelarch.cloud.api.IntResponse;
 import com.ysdata.steelarch.cloud.api.IntegerListResponse;
 import com.ysdata.steelarch.cloud.api.MixRatioListResponse;
 import com.ysdata.steelarch.cloud.api.PointGroutingDataUploadListResponse;
+import com.ysdata.steelarch.cloud.api.SteelArchCollectDataListResponse;
+import com.ysdata.steelarch.cloud.api.SteelArchCraftDataListResponse;
 import com.ysdata.steelarch.cloud.api.StringResponse;
 import com.ysdata.steelarch.cloud.api.SubProjectListResponse;
 import com.ysdata.steelarch.cloud.api.SubProjectPointGroutingParameterListResponse;
@@ -203,6 +205,26 @@ public class ApiClient {
     	return parseJson(result, BlenderActiveDataListResponse.class);
     }
     
+    public SteelArchCraftDataListResponse getAsyncSteelArchCraftDataList(int subproject_Id, int pageIndex, int pageSize) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	header.put("TICKET", CacheManager.getTicket());
+    	String result = HttpUtils.get(BASE_URL + "BlenderData/getAsyncDataList?subProjectId=" + subproject_Id + 
+    			"&strAsyncTime=" + toURLEncoder(SyncTimeDataBaseAdapter.getSingleDataBaseAdapter(context).getSyncTime(
+    					ConstDef.SYNCTIME_TYPE_STEELARCH_CRAFT_DATA)) + "&pageIndex=" + pageIndex + 
+    					"&pageSize="+ pageSize, header);
+    	return parseJson(result, SteelArchCraftDataListResponse.class);
+    }
+    
+    public SteelArchCollectDataListResponse getAsyncSteelArchCollectDataList(int subproject_Id, int pageIndex, int pageSize) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	header.put("TICKET", CacheManager.getTicket());
+    	String result = HttpUtils.get(BASE_URL + "BlenderData/getAsyncDataList?subProjectId=" + subproject_Id + 
+    			"&strAsyncTime=" + toURLEncoder(SyncTimeDataBaseAdapter.getSingleDataBaseAdapter(context).getSyncTime(
+    					ConstDef.SYNCTIME_TYPE_STEELARCH_COLLECT_DATA)) + "&pageIndex=" + pageIndex + 
+    					"&pageSize="+ pageSize, header);
+    	return parseJson(result, SteelArchCollectDataListResponse.class);
+    }
+    
     public IntegerListResponse getSectionExpImageList(int subproject_Id, int pageIndex) {
     	Map<String, String> header = new HashMap<String, String>();
     	header.put("TICKET", CacheManager.getTicket());
@@ -233,6 +255,16 @@ public class ApiClient {
     			subproject_Id + "&lastSyncTime=" +
 				toURLEncoder(SyncTimeDataBaseAdapter.getSingleDataBaseAdapter(context).getSyncTime(
     					ConstDef.SYNCTIME_TYPE_SUBPROJECTSECTION)) + "&pageIndex=" + pageIndex, header);
+    	return parseJson(result, IntegerListResponse.class);
+    }
+    
+    public IntegerListResponse getSyncDeleteSteelArchData(int subproject_Id, int pageIndex) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	header.put("TICKET", CacheManager.getTicket());
+    	String result = HttpUtils.get(BASE_URL + "sync/getSyncDeleteSubProjectSections?subProjectId=" + 
+    			subproject_Id + "&lastSyncTime=" +
+				toURLEncoder(SyncTimeDataBaseAdapter.getSingleDataBaseAdapter(context).getSyncTime(
+    					ConstDef.SYNCTIME_TYPE_STEELARCH_DEL_DATA)) + "&pageIndex=" + pageIndex, header);
     	return parseJson(result, IntegerListResponse.class);
     }
     

@@ -163,7 +163,7 @@ public class MainActivity  extends Activity {
 				} else {
 					uart_status = UART_CONNECTED;
 					if (uart_status == UART_CONNECTED) {
-						Intent intent=new Intent(MainActivity.this, RxMixParamterActivity.class);
+						Intent intent=new Intent(MainActivity.this, RxSteelArchParamterActivity.class);
 						startActivity(intent);
 					} else {
 						Toast.makeText(context, "Œ¥ºÏ≤‚µΩΩ¡∞Ë“«", Toast.LENGTH_SHORT).show();
