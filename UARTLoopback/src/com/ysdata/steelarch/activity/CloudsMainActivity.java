@@ -84,7 +84,7 @@ public class CloudsMainActivity  extends Activity {
 				new Thread() {
 					@Override
 					public void run() {
-						startActivity(new Intent(CloudsMainActivity.this, UploadMixParamterActivity.class));
+						startActivity(new Intent(CloudsMainActivity.this, UploadSteelArchDataActivity.class));
 					}
 				}.start();
 			}

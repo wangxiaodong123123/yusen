@@ -135,7 +135,7 @@
           	android:screenOrientation="landscape"
           	/> 	 
          <activity
-          	android:name="com.ysdata.steelarch.activity.UploadMixParamterActivity"
+          	android:name="com.ysdata.steelarch.activity.UploadSteelArchDataActivity"
           	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
           	android:screenOrientation="landscape"
           	/>  
@@ -149,11 +149,6 @@
           	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
           	android:screenOrientation="landscape"
           	/>	
-          <activity
-          	android:name="com.ysdata.steelarch.activity.UploadMixDateGridViewActivity"
-          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
-          	android:screenOrientation="landscape"
-          	/>		
           <activity
           	android:name="com.ysdata.steelarch.activity.ProjectTreeListView"
           	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 

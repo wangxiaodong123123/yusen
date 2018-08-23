@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.ysdata.steelarch.R;
 import com.ysdata.steelarch.cloud.api.BooleanResponse;
 import com.ysdata.steelarch.cloud.api.IntResponse;
+import com.ysdata.steelarch.cloud.api.SteelArchCollectData;
 import com.ysdata.steelarch.cloud.util.ApiClient;
 import com.ysdata.steelarch.cloud.util.AppUtil;
 import com.ysdata.steelarch.cloud.util.CacheManager;
@@ -15,7 +16,9 @@ import com.ysdata.steelarch.cloud.util.UIUtilities;
 import com.ysdata.steelarch.database.ProjectDataBaseAdapter;
 import com.ysdata.steelarch.database.ProjectPointDataBaseAdapter;
 import com.ysdata.steelarch.element.MixCraftParameter;
+import com.ysdata.steelarch.element.SteelArchCollectParameter;
 import com.ysdata.steelarch.uart.MyActivityManager;
+import com.ysdata.steelarch.uart.UartControlSender;
 import com.ysdata.steelarch.wireless.client.Format;
 
 import android.app.Activity;
@@ -38,7 +41,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class UploadMixParamterActivity extends Activity{
+public class UploadSteelArchDataActivity extends Activity{
 	
 	private Context context;
 	private TextView text_status;
@@ -51,17 +54,17 @@ public class UploadMixParamterActivity extends Activity{
 	private ProjectPointDataBaseAdapter mProjectPointBase;
 	String eng_name;
 	String proj_name;
-	private static final int CLICK_START_MIXDATE_EVENT = 1;
-	private static final int CLICK_END_MIXDATE_EVENT = 2;
+	private static final int CLICK_START_STEELARCH_EVENT = 1;
+	private static final int CLICK_END_STEELARCH_EVENT = 2;
 	int click_event = 0;
-	String upload_end_mixdate;
+	int upload_end_steelarch_orderno;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.upload_mix_data);
 		context = this;
-		MyActivityManager.addActivity(UploadMixParamterActivity.this);
+		MyActivityManager.addActivity(UploadSteelArchDataActivity.this);
 		user_info_tv = (TextView) findViewById(R.id.user_info);
 		user_info_tv.setText(CacheManager.getUserName() + " 欢迎你!");
 		text_status = (TextView) findViewById(R.id.text_status);
@@ -81,57 +84,40 @@ public class UploadMixParamterActivity extends Activity{
 	
 	private Spinner dlg_eng_spinner;
 	private ArrayAdapter<String> eng_adapter;
-	EditText start_mix_date;
-	EditText end_mix_date;
-	int project_position = -1;
-	int subproject_position = -1;
-	String record_project_name;
-	String record_subproject_name;
+	EditText start_mileage1;
+	EditText start_mileage2;
+	EditText end_mileage1;
+	EditText end_mileage2;
 	private void ParameterInputDialog() {
-		LayoutInflater factory = LayoutInflater.from(UploadMixParamterActivity.this);
-		final View dialogView = factory.inflate(R.layout.mix_param_upload_dialog, null);
-		AlertDialog.Builder dlg = new AlertDialog.Builder(UploadMixParamterActivity.this);
-    	dlg.setTitle("输入要上传的搅拌数据");
+		LayoutInflater factory = LayoutInflater.from(context);
+		final View dialogView = factory.inflate(R.layout.panel_mileage_param_dialog, null);
+		dialogView.findViewById(R.id.grout_priority_ly).setVisibility(View.GONE);
+		AlertDialog.Builder dlg = new AlertDialog.Builder(context);
+    	dlg.setTitle("选择要上传的起止钢拱架");
     	dlg.setView(dialogView);
     	final Spinner dlg_proj_spinner = (Spinner) dialogView.findViewById(R.id.proj_name_dlg_id);
-    	final ImageButton search_start_ibt = (ImageButton) dialogView.findViewById(R.id.id_search_start_mix_date_ib);
-    	final ImageButton search_end_ibt = (ImageButton) dialogView.findViewById(R.id.id_search_end_mix_date_ib);
+    	final ImageButton search_start_ibt = (ImageButton) dialogView.findViewById(R.id.search_start_mileage_id);
+    	final ImageButton search_end_ibt = (ImageButton) dialogView.findViewById(R.id.search_end_mileage_id);
     	TextView record_tv = (TextView) dialogView.findViewById(R.id.record_tv_id);
-    	final TextView collect_end_mix_date_tv = (TextView) dialogView.findViewById(R.id.id_end_collect_mix_date_tv);
-    	record_tv.setText("上次上传结束搅拌日期:");
-    	start_mix_date = (EditText) dialogView.findViewById(R.id.id_start_mix_date_et);
-		end_mix_date = (EditText) dialogView.findViewById(R.id.id_end_mix_date_et);
+    	record_tv.setText("上次上传的结束钢拱架:");
+    	start_mileage1 = (EditText) dialogView.findViewById(R.id.start_mileage_et1);
+		start_mileage2 = (EditText) dialogView.findViewById(R.id.start_mileage_et2);
+		end_mileage1 = (EditText) dialogView.findViewById(R.id.end_mileage_et1);
+		end_mileage2 = (EditText) dialogView.findViewById(R.id.end_mileage_et2);
 		dlg_eng_spinner = (Spinner) dialogView.findViewById(R.id.eng_name_dlg_id);
 		final ArrayAdapter<String> proj_adapter;
 		ArrayList<String> prj_list = new ArrayList<String>();
 		final ArrayList<String> eng_list = new ArrayList<String>();
 		mProjectBase.getProjectNameList(prj_list);
-		int record_project_id = mProjectBase.getUploadProjectId();
-		int record_subproject_id = mProjectBase.getUploadSubProjectId();
-		record_project_name = mProjectBase.getProjectName(record_project_id);
-		record_subproject_name = mProjectBase.getSubProjectName(record_subproject_id);
 		int proj_list_size = prj_list.size();
 		String[] proj_areas = new String[proj_list_size];
 		for (int i = 0; i < proj_list_size; i++) {
 			proj_areas[i] = prj_list.get(i);
-			if (project_position == -1 && proj_areas[i].equals(record_project_name)) {
-				project_position = i;
-			}
 		}
-		proj_adapter = new ArrayAdapter<String>(UploadMixParamterActivity.this, android.R.layout.simple_spinner_item, proj_areas);
+		proj_adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, proj_areas);
 		proj_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		dlg_proj_spinner.setAdapter(proj_adapter);
-		if (!record_project_name.equals("") && !record_subproject_name.equals("")) {
-			if (project_position > -1) {
-				dlg_proj_spinner.setSelection(project_position);
-				project_position = -1;
-			}
-			else {
-				dlg_proj_spinner.setSelection(0);
-			}
-		} else {
-			dlg_proj_spinner.setSelection(0);
-		}
+		dlg_proj_spinner.setSelection(0);
 		dlg_proj_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent,
@@ -142,22 +128,15 @@ public class UploadMixParamterActivity extends Activity{
 				String[] eng_areas = new String[eng_list_size];
 				for (int i = 0; i < eng_list_size; i++) {
 					eng_areas[i] = eng_list.get(i);
-					if (subproject_position == -1 && eng_areas[i].equals(record_subproject_name)) {
-						subproject_position = i;
-					}
 				}
-				eng_adapter = new ArrayAdapter<String>(UploadMixParamterActivity.this, android.R.layout.simple_spinner_item, eng_areas);
+				eng_adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, eng_areas);
 				eng_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				dlg_eng_spinner.setAdapter(eng_adapter);
-				if (subproject_position > -1) {
-					dlg_eng_spinner.setSelection(subproject_position);
-					subproject_position = -1;
-				}
-				else {
-					dlg_eng_spinner.setSelection(0);
-				}
-				start_mix_date.setText("");
-				end_mix_date.setText("");
+				dlg_eng_spinner.setSelection(0);
+				start_mileage1.setText("");
+				start_mileage2.setText("");
+				end_mileage1.setText("");
+				end_mileage2.setText("");
 			}
 
 			@Override
@@ -172,31 +151,22 @@ public class UploadMixParamterActivity extends Activity{
 				String dlg_proj_name_str = dlg_proj_spinner.getSelectedItem().toString();
 				String dlg_eng_name_str = dlg_eng_spinner.getSelectedItem().toString();
 				AppUtil.log("dlg_eng_spinner--------------"+dlg_eng_name_str);
-				start_mix_date.setText("");
-				end_mix_date.setText("");
+				start_mileage1.setText("");
+				start_mileage2.setText("");
+				end_mileage1.setText("");
+				end_mileage2.setText("");
 				int project_id = mProjectBase.getProjectId(dlg_proj_name_str); 
 				int subproject_id = mProjectBase.getSubProjectId(dlg_eng_name_str);
 				mProjectBase.updateUploadProjectRecord(project_id, subproject_id);
 				mProjectPointBase.closeDb();
 				if (mProjectPointBase.openDb(project_id, subproject_id)) {
-					String _upload_end_mix_date = mProjectPointBase.getUploadEndMixDate();
-					int _upload_end_mix_page = mProjectPointBase.getMixOrderNoLikeDate(
-							_upload_end_mix_date);
-					AppUtil.log("_upload_end_mix_date-----------" + _upload_end_mix_date+
-							" _upload_end_milage_page:" + _upload_end_mix_page);
-					if (_upload_end_mix_page > 0) {
-						collect_end_mix_date_tv.setText(_upload_end_mix_date);
-					} else {
-						collect_end_mix_date_tv.setText("无记录");
-					}
-					
-					String start_default_mix_date = mProjectPointBase.getMixDateWhereOrderNo(
-							_upload_end_mix_page+1);
-					AppUtil.log(_upload_end_mix_date + " " + _upload_end_mix_date +
-							" " + start_default_mix_date);
-					if (!start_default_mix_date.equals("")) {
-						start_mix_date.setText(start_default_mix_date);
-						end_mix_date.setText(start_default_mix_date);
+					String start_default_mileage = mProjectPointBase.getSteelArchNameWhereOrderNo(1);
+					if (!start_default_mileage.equals("") && start_default_mileage.contains("+")) {
+						String[] mileages = start_default_mileage.split("\\+"); 
+						start_mileage1.setText(mileages[0]);
+						end_mileage1.setText(mileages[0]);
+						start_mileage2.setText(mileages[1]);
+						end_mileage2.setText(mileages[1]);
 					} 
 				}
 			}
@@ -215,10 +185,9 @@ public class UploadMixParamterActivity extends Activity{
 				if (dlg_proj_spinner.getSelectedItem() != null) {
 					project_name = dlg_proj_spinner.getSelectedItem().toString();
 					if (dlg_eng_spinner.getSelectedItem() != null) {
-						click_event = CLICK_START_MIXDATE_EVENT;
+						click_event = CLICK_START_STEELARCH_EVENT;
 						subproject_name = dlg_eng_spinner.getSelectedItem().toString();
-						Intent intent = new Intent(UploadMixParamterActivity.this, UploadMixDateGridViewActivity.class);
-						intent.putExtra("action", "cloud");
+						Intent intent = new Intent(context, SteelArchGridViewActivity.class);
 						intent.putExtra("project_name", project_name);
 						intent.putExtra("subproject_name", subproject_name);
 						startActivity(intent);
@@ -239,10 +208,9 @@ public class UploadMixParamterActivity extends Activity{
 				if (dlg_proj_spinner.getSelectedItem() != null) {
 					project_name = dlg_proj_spinner.getSelectedItem().toString();
 					if (dlg_eng_spinner.getSelectedItem() != null) {
-						click_event = CLICK_END_MIXDATE_EVENT;
+						click_event = CLICK_END_STEELARCH_EVENT;
 						subproject_name = dlg_eng_spinner.getSelectedItem().toString();
-						Intent intent = new Intent(UploadMixParamterActivity.this, UploadMixDateGridViewActivity.class);
-						intent.putExtra("action", "cloud");
+						Intent intent = new Intent(context, SteelArchGridViewActivity.class);
 						intent.putExtra("project_name", project_name);
 						intent.putExtra("subproject_name", subproject_name);
 						startActivity(intent);
@@ -284,45 +252,62 @@ public class UploadMixParamterActivity extends Activity{
 					return;
 				}
 				
-				project_id = mProjectBase.getProjectId(dlg_proj_name_str);
-				if (project_id == -1) {
-					Toast.makeText(context, "数据库中无该合同段名！", Toast.LENGTH_SHORT).show();
-				} else {
-					subproject_id = mProjectBase.getSubProjectId(dlg_eng_name_str);
-					if (subproject_id == -1) {
-						Toast.makeText(context, "工程选择错误！", Toast.LENGTH_SHORT).show();
+				boolean start_mileage_format = checkMileage1Format(start_mileage1.getText().toString()) &&
+						(start_mileage2.getText().toString()).matches("^[0-9]+(\\.[0-9]+)?$");
+				boolean end_mileage_format = checkMileage1Format(end_mileage1.getText().toString()) &&
+						(end_mileage2.getText().toString()).matches("^[0-9]+(\\.[0-9]+)?$");
+				
+				if (start_mileage_format && end_mileage_format) {
+					double start_section_metre = Double.parseDouble(start_mileage1.getText().toString().substring(1)) * 1000
+							+ Double.parseDouble(start_mileage2.getText().toString());
+					double end_section_metre = Double.parseDouble(end_mileage1.getText().toString().substring(1)) * 1000
+							+ Double.parseDouble(end_mileage2.getText().toString());
+					AppUtil.log("dlg_proj_name_str:"+dlg_proj_name_str+ " dlg_eng_name_str:"+dlg_eng_name_str);
+					
+					project_id = mProjectBase.getProjectId(dlg_proj_name_str);
+					if (project_id == -1) {
+						Toast.makeText(context, "数据库中无该合同段名！", Toast.LENGTH_SHORT).show();
 					} else {
-						mProjectPointBase.closeDb();
-						if (mProjectPointBase.openDb(project_id, subproject_id)) {
-							int mixdata_start_orderno = mProjectPointBase.getMixOrderNoLikeDate(start_mix_date.getText().toString());
-							int mixdata_end_orderno = mProjectPointBase.getMixOrderNoLikeDate(end_mix_date.getText().toString());
-							if (mixdata_start_orderno == 0) {
-								Toast.makeText(context, "数据库中无该起始搅拌日期！", Toast.LENGTH_SHORT).show();
-							} else if (mixdata_end_orderno == 0) {
-								Toast.makeText(context, "数据库中无该结束搅拌日期！", Toast.LENGTH_SHORT).show();
-							} else if (mixdata_start_orderno > mixdata_end_orderno) {
-								Toast.makeText(context, "起始搅拌日期不能滞后于结束教版日期！", Toast.LENGTH_SHORT).show();
-							} else if (mixdata_start_orderno <= mixdata_end_orderno) {
-								proj_name = dlg_proj_name_str;
-								eng_name = dlg_eng_name_str;
-								proj_name_tv.setText(proj_name);
-								eng_name_tv.setText(eng_name);
-								upload_end_mixdate = mProjectPointBase.getMixDateWhereOrderNo(mixdata_end_orderno);
-								new UploadGroutingDataThread(mixdata_start_orderno, mixdata_end_orderno).start();
-								try {
-									Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
-									field.setAccessible(true);
-									field.set(dialog, true);// 将mShowing变量设为false，表示对话框已关闭
-									dialog.dismiss();
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-								dlg_eng_spinner = null;
-								eng_adapter = null;
-							}
+						subproject_id = mProjectBase.getSubProjectId(dlg_eng_name_str);
+						if (subproject_id == -1) {
+							Toast.makeText(context, "工程选择错误！", Toast.LENGTH_SHORT).show();
 						} else {
-							Toast.makeText(context, "数据库打开失败", Toast.LENGTH_SHORT).show();
+							mProjectPointBase.closeDb();
+							if (mProjectPointBase.openDb(project_id, subproject_id)) {
+								int steelarch_start_orderno = mProjectPointBase.getSteelArchOrderNoWhereNameMetre(start_section_metre);
+								int steelarch_end_orderno = mProjectPointBase.getSteelArchOrderNoWhereNameMetre(end_section_metre);
+								if (steelarch_start_orderno == 0) {
+									Toast.makeText(context, "数据库中无该起始钢拱架！", Toast.LENGTH_SHORT).show();
+								} else if (steelarch_end_orderno == 0) {
+									Toast.makeText(context, "数据库中无该结束钢拱架！", Toast.LENGTH_SHORT).show();
+								} else if (steelarch_start_orderno > steelarch_end_orderno) {
+									Toast.makeText(context, "起始钢拱架不能滞后于结束钢拱架！", Toast.LENGTH_SHORT).show();
+								} else if (steelarch_start_orderno <= steelarch_end_orderno) {
+									dlg_eng_spinner = null;
+									eng_adapter = null;
+									proj_name_tv.setText(dlg_proj_name_str);
+									eng_name_tv.setText(dlg_eng_name_str);
+									upload_end_steelarch_orderno = steelarch_end_orderno;
+									new UploadSteelArchDataThread(steelarch_start_orderno, steelarch_end_orderno).start();
+									try {
+										Field field = dialog.getClass().getSuperclass().getDeclaredField("mShowing");
+										field.setAccessible(true);
+										field.set(dialog, true);// 将mShowing变量设为false，表示对话框已关闭
+										dialog.dismiss();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							} else {
+								Toast.makeText(context, "数据库打开失败", Toast.LENGTH_SHORT).show();
+							}
 						}
+					}
+				} else {
+					if (!start_mileage_format) {
+						Toast.makeText(context, "起始钢拱架名称格式输入错误，参考格式：k12+1.5", Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(context, "结束钢拱架名称格式输入错误，参考格式：k12+1.5", Toast.LENGTH_SHORT).show();
 					}
 				}
 			}
@@ -351,29 +336,47 @@ public class UploadMixParamterActivity extends Activity{
 	
 	private BroadcastReceiver BdReceiver = new BroadcastReceiver() {
 		public void onReceive(Context context, Intent intent) {
-			String mix_date = intent.getStringExtra("mixdate");
-			if (click_event == CLICK_START_MIXDATE_EVENT) {
-				if (start_mix_date != null) {
-					start_mix_date.setText(mix_date);
-				}
-			} else if (click_event == CLICK_END_MIXDATE_EVENT) {
-				if (end_mix_date != null) {
-					end_mix_date.setText(mix_date);
-				}
-			}
+			String action = intent.getAction();
+			if (action.equals(Format.ACTION_SEND_MILEAGE_NAME)) {
+    			String mileage_name = intent.getStringExtra("sectionName");
+    			if (click_event == CLICK_START_STEELARCH_EVENT) {
+    				if (start_mileage1 != null && start_mileage2 != null) {
+    					start_mileage1.setText(mileage_name.split("\\+")[0]);
+    					start_mileage2.setText(mileage_name.split("\\+")[1]);
+    				}
+    			} else if (click_event == CLICK_END_STEELARCH_EVENT) {
+    				if (end_mileage1 != null && end_mileage2 != null) {
+    					end_mileage1.setText(mileage_name.split("\\+")[0]);
+    					end_mileage2.setText(mileage_name.split("\\+")[1]);
+    				}
+    			}
+    			click_event = 0;
+    		}
 			click_event = 0;
 		};
 	};
 	
-	int uploadOrder;
-	class UploadGroutingDataThread extends Thread {
-		private int mix_start_orderno;
-		private int mix_end_orderno;
+	private boolean checkMileage1Format(String mileage1_string) {
+		if (!mileage1_string.equals("") && (mileage1_string.length() >= 2) && (mileage1_string.startsWith("k") ||
+				mileage1_string.startsWith("K"))) {
+			String mileage1_val_string = mileage1_string.substring(1);
+			System.out.println(mileage1_val_string);
+			if (mileage1_val_string.matches("^[0-9]+(\\.[0-9]+)?$")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	String steelArchName;;
+	class UploadSteelArchDataThread extends Thread {
+		private int steelarch_start_orderno;
+		private int steelarch_end_orderno;
 		
-		public UploadGroutingDataThread(int mix_start_orderno, int mix_end_orderno)
+		public UploadSteelArchDataThread(int steelarch_start_orderno, int steelarch_end_orderno)
 		{
-			this.mix_start_orderno = mix_start_orderno;
-			this.mix_end_orderno = mix_end_orderno;
+			this.steelarch_start_orderno = steelarch_start_orderno;
+			this.steelarch_end_orderno = steelarch_end_orderno;
 		}
 		
 		@Override
@@ -383,36 +386,49 @@ public class UploadMixParamterActivity extends Activity{
 			int retry = 0;
 			IntResponse intResponse = null;
 			BooleanResponse booleanResponse = null;
-			String strDate;
-			String strBeginTime;
-			String strEndTime;
-			double dblMixRatioWater;
-			double dblCount;
-			double dblPosition;
-			String strDesignImage;
-			String strActiveImage;
+			String name;
+			int id;
+			String left_measure_date;
+			String right_measure_date;
+			double left_measure_distance;
+			double right_measure_distance;
+			double left_tunnelface_distance;
+			double right_tunnelface_distance;
+			double left_secondcar_distance;
+			double right_secondcar_distance;
+			String left_pic_dir_tunnelface;
+			String right_pic_dir_tunnelface;
+			String left_pic_dir_entrance;
+			String right_pic_dir_entrance;		
 			int responseId;
 			boolean isExpired = false;
 			
-			MixCraftParameter mixCraftParameter;
-			while(mix_start_orderno <= mix_end_orderno) {
-				mixCraftParameter = mProjectPointBase.getMixCraftParameter(mix_start_orderno);
-				if (mixCraftParameter != null) {
-					uploadOrder = mixCraftParameter.getId();
-					strDate = mixCraftParameter.getMixDate();
-					strBeginTime = mixCraftParameter.getStartTime();
-					strEndTime = mixCraftParameter.getEndTime();
-					dblMixRatioWater = mixCraftParameter.getMixRatio();
-					dblCount = mixCraftParameter.getCementWeight();
-					dblPosition = mixCraftParameter.getDevPostion();
-					strDesignImage = mProjectPointBase.getMixResultPicString(uploadOrder);
-					strActiveImage = mProjectPointBase.getMixScenePicString(uploadOrder);
-					
+			SteelArchCollectParameter mSteelArchCollectParameter;
+			while(steelarch_start_orderno <= steelarch_end_orderno) {
+				mSteelArchCollectParameter = mProjectPointBase.getSteelArchCollectParameter(steelarch_start_orderno);
+				if (mSteelArchCollectParameter != null) {
+					id = mSteelArchCollectParameter.getId();
+					name = mSteelArchCollectParameter.getName();
+					steelArchName = name;
+					left_measure_date = mSteelArchCollectParameter.getLeftMeasureDate();
+					right_measure_date = mSteelArchCollectParameter.getRightMeasureDate();
+					left_measure_distance = mSteelArchCollectParameter.getLeftSteelarchToSteelarchDistance();
+					right_measure_distance = mSteelArchCollectParameter.getRightSteelarchToSteelarchDistance();
+					left_tunnelface_distance = mSteelArchCollectParameter.getLeftSteelarchToTunnelFaceDistance();
+					right_tunnelface_distance = mSteelArchCollectParameter.getRightSteelarchToTunnelFaceDistance();
+					left_secondcar_distance = mSteelArchCollectParameter.getLeftSecondCarToSteelarchDistance();
+					right_secondcar_distance = mSteelArchCollectParameter.getRightSecondCarToSteelarchDistance();
+					left_pic_dir_tunnelface = mProjectPointBase.getSteelArchLeftPicDirTunnelFace(steelarch_start_orderno);
+					right_pic_dir_tunnelface = mProjectPointBase.getSteelArchRightPicDirTunnelFace(steelarch_start_orderno);
+					left_pic_dir_entrance = mProjectPointBase.getSteelArchLeftPicDirEntrance(steelarch_start_orderno);
+					right_pic_dir_entrance = mProjectPointBase.getSteelArchRightPicDirEntrance(steelarch_start_orderno);
 					retry = 0;
 					while(retry++ < 3) {
 						mHandler.sendMessage(mHandler.obtainMessage(1, retry));
-						intResponse = apiClient.uploadBlenderActiveUploadData(subproject_id, uploadOrder, strDate, 
-								strBeginTime, strEndTime, dblMixRatioWater, dblCount, dblPosition);
+						intResponse = apiClient.uploadSteelArchUploadData(subproject_id, id, name, 
+								left_measure_date, right_measure_date, left_measure_distance, right_measure_distance, 
+								left_tunnelface_distance, right_tunnelface_distance, left_secondcar_distance,
+								right_secondcar_distance);
 						if (intResponse != null) {
 							result = intResponse.isSuccess;
 							if (!result) {
@@ -436,8 +452,8 @@ public class UploadMixParamterActivity extends Activity{
 					responseId = intResponse.data;	
 					while(retry++ < 3) {
 						mHandler.sendMessage(mHandler.obtainMessage(2, retry));
-						if (strDesignImage != null && strDesignImage.length() > 0) {
-							booleanResponse = apiClient.uploadBlendeDesignImage(responseId, strDesignImage);
+						if (left_pic_dir_tunnelface != null && left_pic_dir_tunnelface.length() > 0) {
+							booleanResponse = apiClient.uploadSteelArchLeftPicDirTunnelface(responseId, left_pic_dir_tunnelface);
 							if (booleanResponse != null) {
 								result = booleanResponse.isSuccess;
 								if (!result) {
@@ -462,8 +478,8 @@ public class UploadMixParamterActivity extends Activity{
 					retry = 0;
 					while(retry++ < 3) {
 						mHandler.sendMessage(mHandler.obtainMessage(3, retry));
-						if (strActiveImage != null && strActiveImage.length() > 0) {
-							booleanResponse = apiClient.uploadBlendeActiveImage(responseId, strActiveImage);
+						if (left_pic_dir_entrance != null && left_pic_dir_entrance.length() > 0) {
+							booleanResponse = apiClient.uploadSteelArchLeftPicDirEntrance(responseId, left_pic_dir_entrance);
 							if (booleanResponse != null) {
 								result = booleanResponse.isSuccess;
 								if (!result) {
@@ -472,8 +488,6 @@ public class UploadMixParamterActivity extends Activity{
 										break;
 									}
 									continue;
-								} else {
-									mix_start_orderno++;
 								}
 							} else {
 								result = false;
@@ -486,12 +500,64 @@ public class UploadMixParamterActivity extends Activity{
 						break;
 					}
 					
+					retry = 0;
+					while(retry++ < 3) {
+						mHandler.sendMessage(mHandler.obtainMessage(4, retry));
+						if (right_pic_dir_entrance != null && right_pic_dir_entrance.length() > 0) {
+							booleanResponse = apiClient.uploadSteelArchRightPicDirEntrance(responseId, right_pic_dir_entrance);
+							if (booleanResponse != null) {
+								result = booleanResponse.isSuccess;
+								if (!result) {
+									if (CacheManager.getNetErrorMsg().equals(ConstDef.EXPIRED_RESPONSE_STRING)) {
+										isExpired = true;
+										break;
+									}
+									continue;
+								}
+							} else {
+								result = false;
+								continue;
+							}
+							break;
+						} else {
+							result = true;
+						}
+						break;
+					}
+					
+					retry = 0;
+					while(retry++ < 3) {
+						mHandler.sendMessage(mHandler.obtainMessage(5, retry));
+						if (right_pic_dir_entrance != null && right_pic_dir_entrance.length() > 0) {
+							booleanResponse = apiClient.uploadSteelArchRightPicDirEntrance(responseId, right_pic_dir_entrance);
+							if (booleanResponse != null) {
+								result = booleanResponse.isSuccess;
+								if (!result) {
+									if (CacheManager.getNetErrorMsg().equals(ConstDef.EXPIRED_RESPONSE_STRING)) {
+										isExpired = true;
+										break;
+									}
+									continue;
+								} else {
+									steelarch_start_orderno++;
+								}
+							} else {
+								result = false;
+								continue;
+							}
+							break;
+						} else {
+							result = true;
+						}
+						break;
+					}					
+					
 					if (isExpired) {
 						mHandler.sendMessage(mHandler.obtainMessage(7));
 						break;
 					}
 					if (retry >= 3 || !result) {
-						mHandler.sendMessage(mHandler.obtainMessage(4));
+						mHandler.sendMessage(mHandler.obtainMessage(6));
 						break;
 					}
 					try {
@@ -501,7 +567,7 @@ public class UploadMixParamterActivity extends Activity{
 					}
 				}
 			}
-			if (mix_start_orderno > mix_end_orderno) {
+			if (steelarch_start_orderno > steelarch_end_orderno) {
 				mHandler.sendEmptyMessage(8);
 			}
 		}
@@ -514,37 +580,41 @@ public class UploadMixParamterActivity extends Activity{
 				case 1:
 					int retry = (Integer)msg.obj;
 					if (retry == 1)
-						text_status.setText("正在上传第"+uploadOrder+"次搅拌数据……");
+						text_status.setText("正在上传"+steelArchName+"测量数据……");
 					else 
-						text_status.setText("第"+uploadOrder+"次搅拌数据上传失败，正在进行第"+retry+"次重传……");
+						text_status.setText(steelArchName+"测量数据上传失败，正在进行第"+retry+"次重传……");
 					break;
 					
 				case 2:
 					int retry1 = (Integer)msg.obj;
 					if (retry1 > 1)
-						text_status.setText("第"+uploadOrder+"次搅拌效果图上传失败，正在进行第"+retry1+"次重传……");
+						text_status.setText(steelArchName+"左侧掌子面方向照片上传失败，正在进行第"+retry1+"次重传……");
 					break;
 					
 				case 3:
 					int retry2 = (Integer)msg.obj;
 					if (retry2 > 1)
-						text_status.setText("第"+uploadOrder+"次搅拌现场图上传失败，正在进行第"+retry2+"次重传……");
+						text_status.setText(steelArchName+"左侧入口方向照片上传失败，正在进行第"+retry2+"次重传……");
 					break;	
 					
 				case 4:
-					text_status.setText("第"+(Integer)msg.obj+"次搅拌数据上传失败,Error:" + CacheManager.getNetErrorMsg());
-					break;
+					int retry3 = (Integer)msg.obj;
+					if (retry3 > 1)
+						text_status.setText(steelArchName+"右侧掌子面方向照片上传失败，正在进行第"+retry3+"次重传……");
+					break;	
 					
 				case 5:
-					SharedView.showUserExpiredAlertDialog(UploadMixParamterActivity.this);
-					break;
+					int retry4 = (Integer)msg.obj;
+					if (retry4 > 1)
+						text_status.setText(steelArchName+"右侧掌子面方向照片上传失败，正在进行第"+retry4+"次重传……");
+					break;	
 					
 				case 6:
-					UIUtilities.showToast(UploadMixParamterActivity.this, "网络错误", true);
+					text_status.setText(steelArchName+"数据上传失败,Error:" + CacheManager.getNetErrorMsg());
 					break;
 					
 				case 7:
-					UIUtilities.showToast(UploadMixParamterActivity.this, "用户已过期，请重新登陆！", true);
+					UIUtilities.showToast(UploadSteelArchDataActivity.this, "用户已过期，请重新登陆！", true);
 					break;
 					
 				case 8:
@@ -552,6 +622,7 @@ public class UploadMixParamterActivity extends Activity{
 					break;
 					
 				case 9:
+					SharedView.showUserExpiredAlertDialog(UploadSteelArchDataActivity.this);
 					break;
 					
 				case 10:
@@ -575,7 +646,7 @@ public class UploadMixParamterActivity extends Activity{
     		mProjectPointBase.closeDb();
     	}
     	context.unregisterReceiver(BdReceiver);
-    	MyActivityManager.removeActivity(UploadMixParamterActivity.this);
+    	MyActivityManager.removeActivity(UploadSteelArchDataActivity.this);
     	super.onDestroy();
     }
 	

@@ -88,6 +88,17 @@ public class ApiClient {
     	return parseJson(result, BooleanResponse.class);
     }
     
+    public IntResponse uploadSteelArchUploadData(int subproject_id, int id, String name, 
+			String left_measure_date, String right_measure_date, double left_measure_distance, 
+			double right_measure_distance, double left_tunnelface_distance, double right_tunnelface_distance, 
+			double left_secondcar_distance, double right_secondcar_distance) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	header.put("TICKET", CacheManager.getTicket());
+    	String result = HttpUtils.post(BASE_URL + "BlenderData/uploadBlenderActiveData?SubProjectId=" + 
+    				subproject_id, header, null);
+    	return parseJson(result, IntResponse.class);
+    }    
+    
     public IntResponse uploadBlenderActiveUploadData(int subproject_id, int intOrder, String strDate,
     		String strBeginTime, String strEndTime, double dblMixRatioWater, double dblCount, 
     		double dblPosition) {
@@ -128,6 +139,58 @@ public class ApiClient {
     	String result = HttpUtils.postJson(BASE_URL + "BlenderData/SaveDesignImage", header, bodyJson);
     	return parseJson(result, BooleanResponse.class);
     }
+    
+    public BooleanResponse uploadSteelArchLeftPicDirTunnelface(int responseId, String left_pic_dir_tunnelface) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	LinkedHashMap<String, String> json = new LinkedHashMap<String, String>();
+    	json.put("id", responseId+"");
+    	json.put("strDesignImage", left_pic_dir_tunnelface);
+    	String bodyJson = new Gson().toJson(json);
+    	header.put("TICKET", CacheManager.getTicket());
+    	header.put("content-length", bodyJson.length()+"");	
+    	header.put("content-type", "application/json");
+    	String result = HttpUtils.postJson(BASE_URL + "BlenderData/SaveDesignImage", header, bodyJson);
+    	return parseJson(result, BooleanResponse.class);
+    }
+    
+    public BooleanResponse uploadSteelArchRightPicDirTunnelface(int responseId, String right_pic_dir_tunnelface) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	LinkedHashMap<String, String> json = new LinkedHashMap<String, String>();
+    	json.put("id", responseId+"");
+    	json.put("strDesignImage", right_pic_dir_tunnelface);
+    	String bodyJson = new Gson().toJson(json);
+    	header.put("TICKET", CacheManager.getTicket());
+    	header.put("content-length", bodyJson.length()+"");	
+    	header.put("content-type", "application/json");
+    	String result = HttpUtils.postJson(BASE_URL + "BlenderData/SaveDesignImage", header, bodyJson);
+    	return parseJson(result, BooleanResponse.class);
+    }
+    
+    public BooleanResponse uploadSteelArchLeftPicDirEntrance(int responseId, String left_pic_dir_entrance) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	LinkedHashMap<String, String> json = new LinkedHashMap<String, String>();
+    	json.put("id", responseId+"");
+    	json.put("strDesignImage", left_pic_dir_entrance);
+    	String bodyJson = new Gson().toJson(json);
+    	header.put("TICKET", CacheManager.getTicket());
+    	header.put("content-length", bodyJson.length()+"");	
+    	header.put("content-type", "application/json");
+    	String result = HttpUtils.postJson(BASE_URL + "BlenderData/SaveDesignImage", header, bodyJson);
+    	return parseJson(result, BooleanResponse.class);
+    }
+    
+    public BooleanResponse uploadSteelArchRightPicDirEntrance(int responseId, String right_pic_dir_entrance) {
+    	Map<String, String> header = new HashMap<String, String>();
+    	LinkedHashMap<String, String> json = new LinkedHashMap<String, String>();
+    	json.put("id", responseId+"");
+    	json.put("strDesignImage", right_pic_dir_entrance);
+    	String bodyJson = new Gson().toJson(json);
+    	header.put("TICKET", CacheManager.getTicket());
+    	header.put("content-length", bodyJson.length()+"");	
+    	header.put("content-type", "application/json");
+    	String result = HttpUtils.postJson(BASE_URL + "BlenderData/SaveDesignImage", header, bodyJson);
+    	return parseJson(result, BooleanResponse.class);
+    }    
     
     public BooleanResponse uploadBlendeActiveImage(int responseId, String strImage) {
     	Map<String, String> header = new HashMap<String, String>();

@@ -1053,10 +1053,10 @@ public class UartPanelService {
 										
 										if (mProjectPointBase.openDb(proj_val, eng_val)) {
 											if (isLeft) {
-												mProjectPointBase.insertLeftSteelArchCollectRecord(steelarch_orderno_g, date.toString(), 
+												mProjectPointBase.updateLeftSteelArchCollectRecord(steelarch_orderno_g, date.toString(), 
 														measure_distance, tunnelface_distance, secondcar_distance);
 											} else {
-												mProjectPointBase.insertRightSteelArchCollectRecord(steelarch_orderno_g, date.toString(), 
+												mProjectPointBase.updateRightSteelArchCollectRecord(steelarch_orderno_g, date.toString(), 
 														measure_distance, tunnelface_distance, secondcar_distance);
 											}
 											

@@ -9,8 +9,6 @@ import com.ysdata.steelarch.cloud.util.ConstDef;
 import com.ysdata.steelarch.element.DdSteelArchDataParameter;
 import com.ysdata.steelarch.element.ManagerCraftParameter;
 import com.ysdata.steelarch.element.MgrStasticParameter;
-import com.ysdata.steelarch.element.MixCraftParameter;
-import com.ysdata.steelarch.element.MixUploadState;
 import com.ysdata.steelarch.element.SteelArchCollectParameter;
 import com.ysdata.steelarch.element.SteelArchCraftParameter;
 import com.ysdata.steelarch.element.SteelArchDetailParameter;
@@ -66,38 +64,6 @@ public class ProjectPointDataBaseAdapter {
 	private static final int VOLUME_COLLECT_LEFT_PIC_DIR_TUNNELFACE = 17;
 	private static final int VOLUME_COLLECT_RIGHT_PIC_DIR_TUNNELFACE = 18;	
 	
-	private static final String MIX_DOWNLOAD_TABLE = "stir_download";
-	private static final String MIX_DOWNLOAD_ID = "id";
-	private static final String MIX_DOWNLOAD_RATIO = "ratio";
-	private static final String MIX_DOWNLOAD_CREATE_TIME = "create_time";
-	
-	private static final int VOLUME_MIX_DOWNLOAD_ID = 0;
-	private static final int VOLUME_MIX_DOWNLOAD_RATIO = 1;
-	private static final int VOLUME_MIX_DOWNLOAD_CREATE_TIME = 2;
-	
-	private static final String MIX_COLLECT_TABLE = "stir_collect";
-	private static final String MIX_COLLECT_ID = "id";
-	private static final String MIX_COLLECT_RATIO = "ratio";
-	private static final String MIX_COLLECT_DATE = "date";
-	private static final String MIX_COLLECT_START_TIME = "start_time";
-	private static final String MIX_COLLECT_END_TIME = "end_time";
-	private static final String MIX_COLLECT_CEMENT_WEIGHT = "cement_weight";
-	private static final String MIX_COLLECT_POSITION = "position";
-	private static final String MIX_COLLECT_PIC_RESULT = "pic_result";
-	private static final String MIX_COLLECT_PIC_SCENE = "pic_scene";
-	private static final String MIX_COLLECT_ORDERNO = "order_no";
-	
-	private static final int VOLUME_MIX_COLLECT_ID = 0;
-	private static final int VOLUME_MIX_COLLECT_RATIO = 1;
-	private static final int VOLUME_MIX_COLLECT_DATE = 2;
-	private static final int VOLUME_MIX_COLLECT_START_TIME = 3;
-	private static final int VOLUME_MIX_COLLECT_END_TIME = 4;
-	private static final int VOLUME_MIX_COLLECT_CEMENT_WEIGHT = 5;
-	private static final int VOLUME_MIX_COLLECT_POSITION = 6;
-	private static final int VOLUME_MIX_COLLECT_PIC_RESULT = 7;
-	private static final int VOLUME_MIX_COLLECT_PIC_SCENE = 8;
-	private static final int VOLUME_MIX_COLLECT_ORDERNO = 9;
-	
 	private static final String DATABASE_CREATE_STEELARCH_TABLE = "CREATE TABLE IF NOT EXISTS " + STEELARCH_DATA_TABLE + "("
 			+ STEELARCH_ID + " INTEGER PRIMARY KEY,"
 			+ STEELARCH_ORDERNO + " INTEGER," 
@@ -120,25 +86,6 @@ public class ProjectPointDataBaseAdapter {
 			+ COLLECT_RIGHT_PIC_DIR_TUNNELFACE + " TEXT"
 			+ ");";
 	
-	private static final String DATABASE_CREATE_MIX_DOWNLOAD_TABLE = "CREATE TABLE IF NOT EXISTS " + MIX_DOWNLOAD_TABLE + "("
-			+ MIX_DOWNLOAD_ID + " INTEGER PRIMARY KEY,"
-			+ MIX_DOWNLOAD_RATIO + " DOUBLE," 
-			+ MIX_DOWNLOAD_CREATE_TIME + " VARCHAR(50)"
-			+ ");";
-	
-	private static final String DATABASE_CREATE_MIX_COLLECT_TABLE = "CREATE TABLE IF NOT EXISTS " + MIX_COLLECT_TABLE + "("
-			+ MIX_COLLECT_ID + " INTEGER PRIMARY KEY,"
-			+ MIX_COLLECT_RATIO + " DOUBLE," 
-			+ MIX_COLLECT_DATE + " VARCHAR(50),"
-			+ MIX_COLLECT_START_TIME + " VARCHAR(50),"
-			+ MIX_COLLECT_END_TIME + " VARCHAR(50),"
-			+ MIX_COLLECT_CEMENT_WEIGHT + " DOUBLE,"
-			+ MIX_COLLECT_POSITION + " DOUBLE,"
-			+ MIX_COLLECT_PIC_RESULT + " TEXT,"
-			+ MIX_COLLECT_PIC_SCENE + " TEXT,"
-			+ MIX_COLLECT_ORDERNO + " INTEGER"
-			+ ");";
-
     private SQLiteDatabase mDb = null;
     private boolean isOpen = false;
     private Context mContext = null;
@@ -239,17 +186,6 @@ public class ProjectPointDataBaseAdapter {
     		mDb = null;
     		isOpen = false;
     	}
-    }
-    
-    public void insertMixDownloadRecord(int id, double ratio, String create_time) {
-    	if (!isOpen) return;
-    	mDb.execSQL("REPLACE INTO " + MIX_DOWNLOAD_TABLE + " ("
-				+ MIX_DOWNLOAD_ID + ", "
-				+ MIX_DOWNLOAD_RATIO + ", "
-				+ MIX_DOWNLOAD_CREATE_TIME + 
-				") VALUES ("+ id + ","
-				+ ratio +  ",? " +
-				 ")", new Object[]{create_time}); 
     }
     
     public void insertSteelArchCraftDataRecord(int id, String name, double nameMeter, 
@@ -368,23 +304,6 @@ public class ProjectPointDataBaseAdapter {
     	return parameter;
     }	
     
-    public void getDdMixRatioList(List<String> list) {
-    	if (!isOpen) return;
-    	if (list != null) {
-    		list.clear();
-    		Cursor cursor =  mDb.rawQuery("select * from " + MIX_DOWNLOAD_TABLE, null);
-    		while(cursor.moveToNext()) {
-    			list.add(cursor.getDouble(VOLUME_MIX_DOWNLOAD_RATIO)+"");
-    		}
-    		if (cursor != null) cursor.close();
-    	}
-    }
-    
-    public void clearMixDownloadRecord() {
-    	if (!isOpen) return;
-		mDb.delete(MIX_DOWNLOAD_TABLE, null, null);
-    }
-    
     public void clearSteelArchRecord() {
     	if (!isOpen) return;
     	mDb.delete(STEELARCH_DATA_TABLE, null, null);
@@ -395,81 +314,6 @@ public class ProjectPointDataBaseAdapter {
     	if (!isOpen) return end_mix_date;
     	
     	return end_mix_date;
-    }
-    
-    public int getMixOrderNoLikeDate(String mixdate) {
-    	String date = "";
-    	String start_time = "";
-    	int order_no = 0;
-    	if (mixdate.contains(" ")) {
-    		String strs[] = mixdate.split(" ");
-    		if (strs.length == 2) {
-    			date = strs[0];
-    			start_time = strs[1];
-    			Cursor cursor = mDb.rawQuery("select "+MIX_COLLECT_ORDERNO+" from " + MIX_COLLECT_TABLE + 
-    	    			" where " +MIX_COLLECT_DATE+" like ? and " + 
-    					MIX_COLLECT_START_TIME+" like ?", new String[]{date, start_time});
-    			if (cursor.moveToNext()) {
-    				order_no = cursor.getInt(0);
-    			}
-    			if (cursor != null) cursor.close();
-    		}
-    	}
-    	return order_no;
-    }
-    
-    public int getMixOrderNoLikeId(String id) {
-    	int order_no = 0;
-    	Cursor cursor = mDb.rawQuery("select " + MIX_COLLECT_ORDERNO + " from " + MIX_COLLECT_TABLE + 
-    			" where " + MIX_COLLECT_ID + " = " + id, null); 
-    	if (cursor.moveToNext()) {
-    		order_no = cursor.getInt(0);
-    	}
-    	if (cursor != null) cursor.close();
-    	return order_no;
-    }
-    
-    public String getMixDateWhereOrderNo(int order) {
-    	String mixdate = "";
-    	Cursor cursor = mDb.rawQuery("select * from " + MIX_COLLECT_TABLE + 
-    			" where " + MIX_COLLECT_ORDERNO + " = " + order, null); 
-    	if (cursor.moveToNext()) {
-    		mixdate = cursor.getString(VOLUME_MIX_COLLECT_DATE) + " " + cursor.getString(VOLUME_MIX_COLLECT_START_TIME);
-    	}
-    	if (cursor != null) cursor.close();
-    	return mixdate;
-    }
-    
-    public ArrayList<MixUploadState> getMixDateUploadStateList() {
-    	ArrayList<MixUploadState> list = new ArrayList<MixUploadState>();
-    	Cursor cursor = mDb.rawQuery("select * from " + MIX_COLLECT_TABLE, null);  
-    	while(cursor.moveToNext()) {
-    		list.add(new MixUploadState(cursor.getInt(VOLUME_MIX_COLLECT_ID),
-    				cursor.getString(VOLUME_MIX_COLLECT_DATE) + " " + 
-    				cursor.getString(VOLUME_MIX_COLLECT_START_TIME), 0));
-    	}
-    	if (cursor != null) cursor.close();
-    	return list;
-    }
-    
-    public int getMixDataTotalCount() {
-    	Cursor cursor = mDb.rawQuery("select * from " + MIX_COLLECT_TABLE, null);  
-    	int count = 0;
-    	if (cursor != null)
-    		count = cursor.getCount();  
-    	if (cursor != null)
-    		cursor.close();  
-    	return count; 
-    }
-    
-    public int getMixCollectCount() {
-    	Cursor cursor = mDb.rawQuery("select * from " + MIX_COLLECT_TABLE, null);  
-    	int count = 0;
-    	if (cursor != null)
-    		count = cursor.getCount();  
-    	if (cursor != null)
-    		cursor.close();  
-    	return count; 
     }
     
     public int getSteelArchCount() {
@@ -579,26 +423,6 @@ public class ProjectPointDataBaseAdapter {
 		return parameter;
     }
     
-    public MixCraftParameter getMixCraftParameter(int orderno) {
-    	MixCraftParameter parameter = null;
-    	if (!isOpen) return null;
-    	Cursor cursor =  mDb.rawQuery("select * from " + MIX_COLLECT_TABLE + 
-    			" where " + MIX_COLLECT_ORDERNO + "=" + orderno, null);
-		if(cursor.moveToNext()) {
-			int id = cursor.getInt(VOLUME_MIX_COLLECT_ID);
-			double mix_ratio = cursor.getDouble(VOLUME_MIX_COLLECT_RATIO);
-			String mix_date = cursor.getString(VOLUME_MIX_COLLECT_DATE);
-			String start_time = cursor.getString(VOLUME_MIX_COLLECT_START_TIME);
-			String end_time = cursor.getString(VOLUME_MIX_COLLECT_END_TIME);
-			double cement_weight = cursor.getDouble(VOLUME_MIX_COLLECT_CEMENT_WEIGHT);
-			double position = cursor.getDouble(VOLUME_MIX_COLLECT_POSITION);
-			parameter = new MixCraftParameter(id, mix_ratio, mix_date, start_time, end_time, 
-					cement_weight, position);
-		}
-		if (cursor != null) cursor.close();
-		return parameter;
-    }
-    
     public void deleteSteelArchDataRecord() {
     	if (!isOpen) return;
 		mDb.delete(STEELARCH_DATA_TABLE, null, null);
@@ -608,31 +432,6 @@ public class ProjectPointDataBaseAdapter {
     	if (!isOpen) return;
     	mDb.delete(STEELARCH_DATA_TABLE, STEELARCH_ORDERNO + "=" + orderno, null);
     }    
-    
-    public void deleteAllBlenderDataRecord() {
-    	if (!isOpen) return;
-		mDb.delete(MIX_COLLECT_TABLE, null, null);
-    }
-    
-    public MixCraftParameter getMixCraftParameterByMixId(int mix_id) {
-    	MixCraftParameter parameter = null;
-    	if (!isOpen) return null;
-    	Cursor cursor =  mDb.rawQuery("select * from " + MIX_COLLECT_TABLE + 
-    			" where " + MIX_COLLECT_ID + "=" + mix_id, null);
-		if(cursor.moveToNext()) {
-			int id = cursor.getInt(VOLUME_MIX_COLLECT_ID);
-			double mix_ratio = cursor.getDouble(VOLUME_MIX_COLLECT_RATIO);
-			String mix_date = cursor.getString(VOLUME_MIX_COLLECT_DATE);
-			String start_time = cursor.getString(VOLUME_MIX_COLLECT_START_TIME);
-			String end_time = cursor.getString(VOLUME_MIX_COLLECT_END_TIME);
-			double cement_weight = cursor.getDouble(VOLUME_MIX_COLLECT_CEMENT_WEIGHT);
-			double position = cursor.getDouble(VOLUME_MIX_COLLECT_POSITION);
-			parameter = new MixCraftParameter(id, mix_ratio, mix_date, start_time, end_time, 
-					cement_weight, position);
-		}
-		if (cursor != null) cursor.close();
-		return parameter;
-    }
     
     public MgrStasticParameter getMgrStasticParameter() {
     	MgrStasticParameter parameter = null;
@@ -757,47 +556,8 @@ public class ProjectPointDataBaseAdapter {
     	}
     	return pic_string;   	
     }    
-    public String getMixResultPicString(int id) {
-    	String pic_string = "";
-    	Cursor cursor = mDb.rawQuery("select "+ MIX_COLLECT_PIC_RESULT + " from " + MIX_COLLECT_TABLE + 
-    			" where " + MIX_COLLECT_ID + "=" + id, null);
-    	if (cursor.moveToNext()) {
-    		pic_string = cursor.getString(0);
-    		cursor.close();
-    	}
-    	return pic_string;
-    }
     
-    public String getMixScenePicString(int id) {
-    	String pic_string = "";
-    	Cursor cursor = mDb.rawQuery("select "+ MIX_COLLECT_PIC_SCENE + " from " + MIX_COLLECT_TABLE + 
-    			" where " + MIX_COLLECT_ID + "=" + id, null);
-    	if (cursor.moveToNext()) {
-    		pic_string = cursor.getString(0);
-    		cursor.close();
-    	}
-    	return pic_string;
-    }
-    
-    public void insertMixCollectRecord(int id, double ratio, String date, String start_time,
-    		String end_time, double cement_weight, double position) {
-    	if (!isOpen) return;
-    	mDb.execSQL("REPLACE INTO " + MIX_COLLECT_TABLE + " ("
-				+ MIX_COLLECT_ID + ", "
-				+ MIX_COLLECT_RATIO + ", "
-				+ MIX_COLLECT_DATE + ", "
-				+ MIX_COLLECT_START_TIME + ","
-				+ MIX_COLLECT_END_TIME + ","
-				+ MIX_COLLECT_CEMENT_WEIGHT + ", "
-				+ MIX_COLLECT_POSITION + 
-				") VALUES ("+ id + ","
-				+ ratio +  ",? " + ",? "
-				+ ",? " + "," + cement_weight + ","
-				+ position + 
-				 ")", new Object[]{date, start_time, end_time}); 
-    }
-    
-    public void insertLeftSteelArchCollectRecord(int orderno, String date, double measure_distance, 
+    public void updateLeftSteelArchCollectRecord(int orderno, String date, double measure_distance, 
     		double tunnelface_distance, double secondcar_distance) {
     	if (!isOpen) return;
     	mDb.execSQL("UPDATE " + STEELARCH_DATA_TABLE + " SET "
@@ -808,7 +568,7 @@ public class ProjectPointDataBaseAdapter {
 				+ STEELARCH_ORDERNO + "=" + orderno, new Object[]{date}); 
     }
     
-    public void insertRightSteelArchCollectRecord(int orderno, String date, double measure_distance, 
+    public void updateRightSteelArchCollectRecord(int orderno, String date, double measure_distance, 
     		double tunnelface_distance, double secondcar_distance) {
     	if (!isOpen) return;
     	mDb.execSQL("UPDATE " + STEELARCH_DATA_TABLE + " SET "
@@ -818,49 +578,6 @@ public class ProjectPointDataBaseAdapter {
 				+ COLLECT_RIGHT_STEELARCH_TO_SECONDCAR_DISTANCE + "=" + secondcar_distance + " WHERE " 
 				+ STEELARCH_ORDERNO + "=" + orderno, new Object[]{date}); 
     }    
-    
-    public void setCollectOrderNo() {
-    	if (!isOpen) return;
-    	Cursor cursor = mDb.rawQuery("select " + MIX_COLLECT_ID + " from " + 
-    			MIX_COLLECT_TABLE + " order by " + MIX_COLLECT_ID + " asc" , null);
-    	int orderno = 1;
-    	mDb.beginTransaction();
-    	AppUtil.log("===========setCollectOrderNo===============");
-    	ContentValues value = new ContentValues();
-    	while (cursor.moveToNext()) {
-    		value.put(MIX_COLLECT_ORDERNO, orderno);
-    		mDb.update(MIX_COLLECT_TABLE, value, MIX_COLLECT_ID + "=" + cursor.getInt(0), null);
-    		orderno++;
-    	} 
-    	AppUtil.log("===========setCollectOrderNo===============");
-    	mDb.setTransactionSuccessful(); 
-        mDb.endTransaction(); 
-    	if (cursor != null) {
-    		cursor.close();
-    	}
-    }
-    
-    public int checkLastMixCollectId() {
-    	int id = 0;
-    	Cursor cursor = mDb.rawQuery("select " + MIX_COLLECT_ID + " from " + 
-    			MIX_COLLECT_TABLE + " order by " + MIX_COLLECT_ID + " desc limit 0, 1" , null);
-    	if (cursor.moveToNext()) {
-    		id = cursor.getInt(0);
-    		cursor.close();
-    	}
-    	return id;
-    }
-    
-    public void updateMixCollectPicResult(int id, String pic_string) {
-    	if (!isOpen) return;
-    	ContentValues value = new ContentValues();
-    	AppUtil.log("=========updateMixCollectPicResult=========");
-    	AppUtil.log("pic_string:");
-    	AppUtil.log(pic_string);
-    	AppUtil.log("=========updateMixCollectPicResult=========");
-    	value.put(MIX_COLLECT_PIC_RESULT, pic_string);
-    	mDb.update(MIX_COLLECT_TABLE, value, MIX_COLLECT_ID + "=" + id, null);
-    }
     
     public void updateSteelArchCollectLeftPicDirEntrance(int orderno, String pic_string) {
     	if (!isOpen) return;
@@ -993,15 +710,4 @@ public class ProjectPointDataBaseAdapter {
 		value.put(COLLECT_RIGHT_STEELARCH_TO_SECONDCAR_DISTANCE, secondcar_to_steelarch_distance);
 		mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID+" = " + id, null);
     }    
-    
-    public void updateMixCollectPicScene(int id, String pic_string) {
-    	if (!isOpen) return;
-    	ContentValues value = new ContentValues();
-    	AppUtil.log("=========updateMixCollectPicScene=========");
-    	AppUtil.log("pic_string:");
-    	AppUtil.log(pic_string);
-    	AppUtil.log("=========updateMixCollectPicScene=========");
-    	value.put(MIX_COLLECT_PIC_SCENE, pic_string);
-    	mDb.update(MIX_COLLECT_TABLE, value, MIX_COLLECT_ID + "=" + id, null);
-    }
 }
