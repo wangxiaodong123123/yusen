@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="anchor_type">
+        <item>25中空锚杆</item>
+        <item>25组合锚杆</item>
+        <item>22螺纹钢砂浆锚杆</item>
+    </string-array>
+</resources>

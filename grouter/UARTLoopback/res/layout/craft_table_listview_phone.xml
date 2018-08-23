@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+   <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp"
+        android:weightSum="1026"
+	    android:orientation="horizontal" >
+	  <TextView 
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="12"
+        />
+	<!-- 置筋编号 -->
+      <View 
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="match_parent"
+      	android:background="@android:color/black"
+      	android:visibility="visible"/>
+          
+       <TextView 
+           android:layout_width="0dp"
+           android:layout_weight="10"
+           android:layout_height="40dp"
+           android:id="@+id/craft_transfer_sign"
+           android:textSize="15sp"
+           android:layout_gravity="center_vertical"
+           android:gravity="center"
+		   android:textColor="@android:color/black"/>
+       <TextView 
+           android:layout_width="0dp"
+           android:layout_weight="140"
+           android:layout_height="wrap_content"
+           android:id="@+id/craft_anchor_seq"
+           android:textSize="15sp"
+           android:layout_gravity="center_vertical"
+           android:gravity="center"
+		   android:textColor="@android:color/black"/>
+	    <!-- 置筋类型 -->
+        <View 
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/seq_right_line"
+        	android:visibility="visible"/>
+        <TextView 
+            android:layout_width="0dp"
+       		android:layout_weight="120"
+            android:layout_height="wrap_content"
+            android:id="@+id/craft_anchor_type"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>
+       <!-- 置筋型号 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/anchor_type_right_line"
+        	android:visibility="visible"/>
+        <TextView 
+            android:layout_width="0dp"
+        	android:layout_weight="105"
+            android:layout_height="wrap_content"
+            android:id="@+id/craft_anchor_model"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>
+       <!-- 设计置筋长度 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/anchor_model_right_line"
+        	android:visibility="visible"/>
+        <TextView 
+          	android:layout_width="0dp"
+        	android:layout_weight="75"
+        	android:layout_height="wrap_content"
+           	android:id="@+id/craft_design_anchor_len"
+           	android:textSize="16sp"
+           	android:layout_gravity="center_vertical"
+           	android:gravity="center"
+		   	android:textColor="@android:color/black"/>  
+       <!-- 设计孔口注浆压力 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/anchor_len_right_line"
+        	android:visibility="visible"/>
+	    <TextView 
+	        android:layout_width="0dp"
+        	android:layout_weight="100"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/craft_design_pressure"
+	        android:textSize="16sp"
+	        android:layout_gravity="center_vertical"
+	        android:gravity="center"
+			android:textColor="@android:color/black"/>   
+        <!-- 设计保压时间 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/design_pressure_right_line"
+        	android:visibility="visible"/>
+        
+            <TextView 
+	            android:layout_width="0dp"
+        		android:layout_weight="70"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/craft_hold_time"
+	            android:textSize="16sp"
+	            android:layout_gravity="center_vertical"
+	            android:gravity="center"
+				android:textColor="@android:color/black"/>   
+            
+
+        <!-- 理论注浆量 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/hold_time_right_line"
+        	android:visibility="visible"/>        
+        <TextView 
+            android:layout_width="0dp"
+        	android:layout_weight="60"
+            android:layout_height="wrap_content"
+            android:id="@+id/craft_design_cap"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>   
+        <!-- 每米理论注浆量 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/design_cap_right_line"
+        	android:visibility="visible"/>
+        
+	        <TextView 
+	            android:layout_width="0dp"
+        		android:layout_weight="80"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/craft_cap_unit_meter"
+	            android:textSize="16sp"
+	            android:layout_gravity="center_vertical"
+	            android:gravity="center"
+				android:textColor="@android:color/black"/>  
+            
+        <!-- 单位时间注浆泵流量 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/cap_unit_meter_right_line"
+        	android:visibility="visible"/>
+        
+	        <TextView 
+	            android:layout_width="0dp"
+        		android:layout_weight="100"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/craft_cap_unit_hour"
+	            android:textSize="16sp"
+	            android:layout_gravity="center_vertical"
+	            android:gravity="center"
+				android:textColor="@android:color/black"/>
+            
+        <!-- 备注 -->
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:id="@+id/cap_unit_hour_line_right"
+        	android:visibility="visible"/>
+        
+	        <TextView 
+	            android:layout_width="0dp"
+        		android:layout_weight="126.5"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/craft_remark"
+	            android:textSize="16sp"
+	            android:layout_gravity="center_vertical"
+	            android:gravity="center"
+				android:textColor="@android:color/black"/>
+	        
+        <View 
+            android:layout_width="0dp"
+        	android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:visibility="visible"/> 	
+		</LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1026"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="12"
+            android:layout_height="match_parent"
+            />
+	    <View
+	        android:layout_width="0dp"
+            android:layout_weight="1002"
+	        android:layout_height="1dp"
+	        android:background="@android:color/black"
+	        android:visibility="visible"/> 
+	</LinearLayout>         
+</LinearLayout>		

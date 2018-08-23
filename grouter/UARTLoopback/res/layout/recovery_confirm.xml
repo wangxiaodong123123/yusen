@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" 
+    android:background="@drawable/cloud_bg">
+    
+	 <TextView 
+        android:textSize="20sp" 
+		android:layout_width="fill_parent" 
+		android:layout_height="50dip" 
+		android:textColor="@color/title"
+		android:id="@+id/recovery_confirm_title"
+		android:paddingLeft="70dip"
+		android:paddingTop="15dip"
+		android:text="管理员操作->程序初始化"
+	/>
+	 
+    <RelativeLayout 	
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_marginTop="130dip"
+		
+		>   
+    <TextView 
+       			 android:textSize="20.0dip" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:layout_centerHorizontal="true"
+				android:textColor="@color/baise"
+        	    android:id="@+id/recovery_conf_content"
+        />
+    </RelativeLayout>	
+     
+    <RelativeLayout 	
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_marginTop="100dip"
+		
+		>   
+		<LinearLayout 
+		    android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+		    android:orientation="horizontal" 
+		    android:layout_centerHorizontal="true"
+	    
+		    >
+    <Button 		
+        		android:id="@+id/recovery_confirm_bt"
+       			android:textSize="20.0dip" 
+				android:layout_width="90dip" 
+				android:layout_height="50dip" 
+        		android:text="确定"
+        />
+    <Button 		
+        		android:id="@+id/recovery_cancel_bt"   			
+       			android:textSize="20.0dip" 
+				android:layout_width="90dip" 
+				android:layout_height="50dip" 
+				android:layout_marginLeft="100dip"
+        		android:text="取消"
+        />
+     </LinearLayout>
+  </RelativeLayout>
+	 	
+</LinearLayout>

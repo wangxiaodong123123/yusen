@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="title">#5a5191</color>
+    <color name="main_title">#5a5191</color>
+   <color name="zhihui">#4e4e4e</color>
+    <color name="baise">#ffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="gray_dark">#aaa</color>
+</resources>

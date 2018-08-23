@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+     <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:weightSum="1009"
+	    android:orientation="horizontal" >
+	    <TextView 
+	        android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+	        />
+		<View
+		    android:layout_width="0dp"
+		    android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />	
+		<LinearLayout 
+            android:layout_width="0dp"
+            android:layout_weight="125"
+            android:weightSum="125"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <ImageView 
+	            android:layout_width="0dp"
+	            android:layout_weight="15"
+	            android:layout_height="40dp"
+	            android:id="@+id/mgr_wrcard_sign"
+	            android:src="@drawable/wrcard_sign"
+				android:scaleType="center"
+				android:visibility="visible"
+				/>
+	        <TextView
+			    android:id="@+id/mgr_seq"
+			    android:layout_width="0dp"
+			    android:layout_weight="110"
+			    android:layout_height="match_parent"
+		        android:textSize="14sp"
+		        android:gravity="center"
+			    android:textColor="@android:color/black"/>
+	   </LinearLayout>   		
+		
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_anchor_type"
+		    android:layout_width="0dp"
+			android:layout_weight="95"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+		
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_anchor_model"
+		    android:layout_width="0dp"
+			android:layout_weight="85"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+		
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_design_len"
+		    android:layout_width="0dp"
+			android:layout_weight="60"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black" />
+		<!-- 注浆日期 -->
+        <View 
+            android:layout_width="0dp"
+			android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:visibility="visible"/>
+        
+        <TextView 
+            android:layout_width="0dp"
+			android:layout_weight="80"
+            android:layout_height="match_parent"
+            android:id="@+id/mgr_date"
+            android:textSize="14sp"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>
+        
+		<!-- 开始时间 -->
+        <View 
+            android:layout_width="0dp"
+			android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:visibility="visible"/>
+       
+        <TextView 
+            android:layout_width="0dp"
+			android:layout_weight="65"
+            android:layout_height="match_parent"
+            android:id="@+id/mgr_start_date"
+            android:textSize="14sp"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>
+        
+		<!-- 结束时间 -->
+        <View 
+            android:layout_width="0dp"
+			android:layout_weight="1.5"
+            android:layout_height="match_parent"
+        	android:background="@android:color/black"
+        	android:visibility="visible"/>
+       
+        <TextView 
+            android:layout_width="0dp"
+			android:layout_weight="65"
+            android:layout_height="match_parent"
+            android:id="@+id/mgr_end_date"
+            android:textSize="14sp"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>
+        
+      <!--  理论注浆量 -->
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_thereo_cap"
+		    android:layout_width="0dp"
+			android:layout_weight="46"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+		<!--  实际注浆量 -->
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_practice_cap"
+		    android:layout_width="0dp"
+			android:layout_weight="47"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+		
+      <!--  理论注浆压力 -->
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_design_pressure"
+		    android:layout_width="0dp"
+			android:layout_weight="58.5"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+		<!--  实际注浆压力 -->
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		
+		<TextView
+		    android:id="@+id/mgr_measure_pressure"
+		    android:layout_width="0dp"
+			android:layout_weight="60"
+		    android:layout_height="match_parent"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+			
+        <!--  理论保压时间 -->
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		<TextView
+		    android:id="@+id/mgr_design_hold_time"
+		    android:layout_width="0dp"
+			android:layout_weight="45.5"
+		    android:layout_height="wrap_content"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>
+		<!--  实际保压时间 -->
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+		<TextView
+		    android:id="@+id/mgr_practice_hold_time"
+		    android:layout_width="0dp"
+			android:layout_weight="48"
+		    android:layout_height="wrap_content"
+	        android:textSize="14sp"
+	        android:gravity="center"
+		    android:textColor="@android:color/black"/>		
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" />
+        <TextView 
+            android:layout_width="0dp"
+			android:layout_weight="93"
+            android:layout_height="wrap_content"
+            android:id="@+id/mgr_remark"
+            android:textSize="14sp"
+            android:gravity="center"
+			android:textColor="@android:color/black"/>
+		<View
+		    android:layout_width="0dp"
+			android:layout_weight="1.5"
+		    android:layout_height="match_parent" 
+		    android:background="@android:color/black"
+		    android:visibility="visible" /> 
+	</LinearLayout>
+	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:weightSum="1010"
+    	android:orientation="horizontal"
+        >
+	    <TextView 
+	        android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="7"
+	        />
+	    <View
+	        android:layout_width="0dp"
+	        android:layout_weight="996"
+	        android:layout_height="1dp"
+	        android:background="@android:color/black"
+	        android:visibility="visible"/>  
+    </LinearLayout> 
+</LinearLayout>
