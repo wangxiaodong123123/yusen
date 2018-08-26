@@ -445,11 +445,12 @@ public class ProjectPointDataBaseAdapter {
     		Cursor end_cursor =  mDb.rawQuery("select * from " + STEELARCH_DATA_TABLE + 
     				" where " + STEELARCH_ORDERNO + "=" + table_size, null);
     		if (start_cursor.moveToNext() && end_cursor.moveToNext()) {
+    			java.text.DecimalFormat   df   =new   java.text.DecimalFormat("##.##"); 
     			parameter = new MgrStasticParameter(start_cursor.getString(VOLUME_COLLECT_LEFT_MEASURE_DATE) + "~" + 
     					end_cursor.getString(VOLUME_COLLECT_RIGHT_MEASURE_DATE), 
     					start_cursor.getString(VOLUME_STEELARCH_NAME) + "~" +
     							end_cursor.getString(VOLUME_STEELARCH_NAME), 
-    							(end_cursor.getDouble(VOLUME_NAME_TO_METER) - start_cursor.getDouble(VOLUME_NAME_TO_METER))+"");
+    							(Double.parseDouble(df.format(end_cursor.getDouble(VOLUME_NAME_TO_METER) - start_cursor.getDouble(VOLUME_NAME_TO_METER))))+"");
     			start_cursor.close();
     			end_cursor.close();
     		}

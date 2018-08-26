@@ -85,6 +85,7 @@ public class ManagerCraftFileListActivity extends Activity {
 	private void initData() {
 		engNameInit();
 		mileage_tunnel_entrance_tv.setText(mileage_tunnel_entrance);
+		mMgrStasticParameter = mProjectPointBase.getMgrStasticParameter();
 		if (mMgrStasticParameter != null) {
 			stastic_date_tv.setText(mMgrStasticParameter.getDate());
 			stastic_mileage_tv.setText(mMgrStasticParameter.getMileage());
@@ -96,7 +97,6 @@ public class ManagerCraftFileListActivity extends Activity {
 	private void tableListInit() {
 		mgr_list = new ArrayList<ManagerCraftParameter>();
 		mProjectPointBase.getManagerCraftParameterList(mgr_list, 99999);
-		mMgrStasticParameter = mProjectPointBase.getMgrStasticParameter();
 		mAdapter = new ManagerCraftParameterAdapter(mgr_list, this);
 		mListView.setAdapter(mAdapter);
 	}

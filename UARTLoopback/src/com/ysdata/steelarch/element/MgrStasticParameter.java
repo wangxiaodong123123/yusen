@@ -7,9 +7,9 @@ public class MgrStasticParameter {
 	
 	public MgrStasticParameter(String date, String mileage, String mileage_distance) {
 		// TODO Auto-generated constructor stub
-		setMileage_distance(date);
-		setMileage_distance(mileage_distance);
 		setDate(date);
+		setMileage_distance(mileage_distance);
+		setMileage(mileage);
 	}
 	
 	/**

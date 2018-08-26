@@ -97,8 +97,8 @@ public class ManagerCraftFileActivity extends Activity {
 			String[] str_arr = left_pic_dir_entrance_string.split(" ");
 			byte[] int_arr = new byte[str_arr.length];
 			for (int i = 0; i < str_arr.length; i++) {
-				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
-//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16); //for test
+//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
+				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16); //for test
 			}
 			Bitmap bm = BitmapFactory.decodeByteArray(int_arr, 0, int_arr.length);
 			left_pic_dir_tunnel_entrance_igv.setImageBitmap(bm); 
@@ -108,8 +108,8 @@ public class ManagerCraftFileActivity extends Activity {
 			String[] str_arr = left_pic_dir_face_string.split(" ");
 			byte[] int_arr = new byte[str_arr.length];
 			for (int i = 0; i < str_arr.length; i++) {
-				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
-//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16);
+//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
+				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16);
 			}
 			Bitmap bm = BitmapFactory.decodeByteArray(int_arr, 0, int_arr.length);
 			left_pic_dir_tunnelface_igv.setImageBitmap(bm); 
@@ -124,8 +124,8 @@ public class ManagerCraftFileActivity extends Activity {
 			String[] str_arr = right_pic_dir_entrance_string.split(" ");
 			byte[] int_arr = new byte[str_arr.length];
 			for (int i = 0; i < str_arr.length; i++) {
-				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
-//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16); //for test
+//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
+				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16); //for test
 			}
 			Bitmap bm = BitmapFactory.decodeByteArray(int_arr, 0, int_arr.length);
 			right_pic_dir_tunnel_entrance_igv.setImageBitmap(bm); 
@@ -135,8 +135,8 @@ public class ManagerCraftFileActivity extends Activity {
 			String[] str_arr = right_pic_dir_face_string.split(" ");
 			byte[] int_arr = new byte[str_arr.length];
 			for (int i = 0; i < str_arr.length; i++) {
-				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
-//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16);
+//				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 10);
+				int_arr[i] = (byte) (int)Integer.valueOf(str_arr[i], 16);
 			}
 			Bitmap bm = BitmapFactory.decodeByteArray(int_arr, 0, int_arr.length);
 			right_pic_dir_tunnelface_igv.setImageBitmap(bm); 
