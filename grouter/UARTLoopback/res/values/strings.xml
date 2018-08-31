@@ -81,9 +81,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     
-    <string name="version_number">当前版本:YS200-Grouter-V20180823</string>
+    <string name="version_number">当前版本:YS200-Grouter-V20180831</string>
     <string name="update_info">更新日志:
-        \n1 修改无法同步工段及工点数据
+        \n1 当同步到工段数据才会更新时间
         \n2 
         \n3 
      	</string>

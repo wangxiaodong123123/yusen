@@ -665,7 +665,9 @@ public class SubProjectSectionListActivity extends Activity {
     			}
     		} while(hasMore);
     		if (isSyncSuccess) {
-    			synctimebase.saveSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECTSECTION, apiClient.getCurrentDateTime());
+    			if (isLocalUpdate) {
+    				synctimebase.saveSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECTSECTION, apiClient.getCurrentDateTime());
+    			}
     			NetHandler.sendMessage(NetHandler.obtainMessage(MSG_SYNC_SECTION_LIST_SUCCESS, isLocalUpdate ? 1 : 0));
     		}
 //    		NetHandler.sendEmptyMessage(MSG_PROGRESSBAR_CANCEL);
