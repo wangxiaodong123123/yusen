@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- clouds -->
+    <string name="network_not_detected">未检测到网络</string>
+    
+	<!-- set_create_craft_file -->
+    <string name="craft_title_name">注浆工艺参数编制表</string>
+    <string name="craft_engin_text">工程名称:</string>
+    <string name="craft_mix_date_text">搅拌日期:</string>
+    <string name="mix_ratio_text">水灰比:</string>
+    <string name="mix_weight_text">配料总量:</string>
+    <string name="craft_picture_title_name">注浆工点位置图示(根据现场注浆工点布置绘图):</string>
+    <string name="craft_param_text_name">工艺参数:</string>
+    <string name="craft_anchor_amount_text">本注浆工段锚孔数量(根):</string>
+    <string name="craft_water_ratio_text">配合比(水泥 : 砂 : 水):</string>
+    <string name="craft_dev_seq_text">锚孔位置编号\n(注浆工段号-工点号)</string>
+    <string name="craft_dev_type_text">置筋类型</string>
+    <string name="craft_dev_model_text">置筋型号</string>
+    <string name="craft_theore_len_text">设计置筋\n长度(m)</string>
+    <string name="craft_theore_pressure_text">设计孔口注浆\n压力(MPa)</string>
+    <string name="craft_hold_time_text">设定保压\n时间(s)</string>
+    <string name="craft_theore_cap_text">理论注\n浆量(L)</string>
+    <string name="craft_cap_unit_meter_text">每米理论\n注浆量(L)</string>
+    <string name="craft_cap_unit_hour_text">单位时间注浆\n泵流量(L/H)</string>
+    <string name="craft_remark_text">备注</string>
+    <string name="craft_work_company_text">施工单位:</string>
+    <string name="craft_supervision_company_text">监理单位:</string>
+    
+    <!-- manager_craft_file -->
+    <string name="mgr_craft_title_name">现场水泥（砂）浆搅拌记录表</string>
+    <string name="mgr_project_title">合同段名称:</string> 
+    <string name="mgr_craft_param_text_name">注浆参数记录:</string>
+    <string name="mgr_capacity">注浆量（L）</string>
+    <string name="mgr_theore_cap">理论\n注浆量</string>
+    <string name="mgr_practice_cap">实际\n注浆量</string>  
+    <string name="mgr_pressure">孔口注浆压力(MPa)</string>
+    <string name="mgr_design_pressure">设计孔口\n注浆压力</string>
+    <string name="mgr_measure_pressure">实测孔口\n注浆压力</string>
+    <string name="mgr_hold_time">保压时间（s）</string>
+    <string name="mgr_design_hold_time">设计保\n压时间</string>
+    <string name="mgr_practice_hold_time">实际保\n压时间</string>
+    <string name="mgr_date">注浆日期</string>    
+    <string name="mgr_start_date">开始时间</string>    
+    <string name="mgr_end_date">结束时间</string>    
+    
+    <!-- mgr_anchor_stticstics -->
+    <string name="stas_project_title">合同段名称:</string> 
+    <string name="stas_table_title">置筋数量统计表</string> 
+    <string name="stas_eng_name">工程名称:</string> 
+    <string name="stas_start_mileage">起始注浆工段:</string> 
+    <string name="stas_end_mileage">终止注浆工段:</string> 
+    
+    <!-- mgr_one_anchor_record -->
+    <string name="single_table_title">注浆工点参数曲线表</string> 
+    <string name="single_project_title">合同段名称:</string> 
+    <string name="single_pressure_title">孔口注浆压力变化曲线图</string> 
+    <string name="single_cap_title">注浆量累计曲线图</string> 
+    
+    <string name="application_name">智能搅拌</string>
+    <string name="table_name">注浆工艺参数表</string>
+    <string name="suidao_text">工程名称:</string>
+    <string name="suidao_name">西华山</string>
+    <string name="ascending_text">上行(     )</string>
+    <string name="ascending_value">100</string>
+    <string name="descending_text">下行(hello)</string>
+    <string name="descending_value">200</string>
+    <string name="mileage_text">注浆工段:</string>
+    <string name="mileage_value">3</string>
+    <string name="dev_seq">锚孔编号\n（注浆工段-锚孔编号）</string>
+    <string name="dev_seq_detail">（注浆工段-锚孔编号）</string>
+    <string name="dev_len">置筋长度(m)</string>
+    <string name="theore_len">设计置\n筋杆长度</string>
+    <string name="slurry_pressure">注浆压力(MPa)</string>
+    <string name="theore_pressure">设计孔口\n注浆压力</string>
+    <string name="measure_pressure">实测孔口\n注浆压力</string>
+    <string name="slurry_capacity">注浆量（L）</string>
+    <string name="theore_cap">理论\n注浆量</string>
+    <string name="measure_cap">实际\n注浆量</string>
+    <string name="remark">备注</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="version_number">当前版本:YS200-Blender-V20180711</string>
+    <string name="update_info">更新日志:
+        \n1 修改搅拌时间全为1439的问题。
+        \n2 
+     	</string>
+
+        <!--  BluetoothChat -->
+    <string name="send">Send</string>
+    <string name="not_connected">You are not connected to a device</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="title_connecting">连接中...</string>
+    <string name="title_connected">已连接有线通信设备</string>
+    <string name="title_not_connected">未连接有线通信设备</string>
+    
+    <string name="mix_connecting">连接中...</string>
+    <string name="mix_connected">已连接到搅拌仪</string>
+    <string name="mix_not_connected">未连接搅拌仪</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+
+    <!-- Options Menu -->
+    <string name="connect">Connect a device</string>
+    <string name="discoverable">Make discoverable</string>
+</resources>

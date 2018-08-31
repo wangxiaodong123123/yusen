@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>   
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/main_bg">
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <ImageView 
+                android:layout_width="128dip" 
+				android:layout_height="35dip"
+				android:layout_marginTop="13dip"
+				android:gravity="center_vertical"
+				android:background="@drawable/company_logo"
+                />
+		    <TextView 
+		        android:textSize="35px" 
+		        android:id="@+id/main_title_id"
+				android:layout_width="wrap_content" 
+				android:layout_height="60px" 
+				android:textColor="#5a5191"
+				android:gravity="center_vertical"
+				android:text="YS200智能注浆参数测控系统"
+			/> 
+        </LinearLayout>
+		
+		    <ImageButton
+		        android:id="@+id/param_set_id"
+		        android:layout_width="160px"
+		        android:layout_height="170px"
+		        android:layout_x="202px"
+		        android:layout_y="141px"	
+		        android:background="@drawable/param_send_icon" />
+		    
+		     <TextView 
+		        android:layout_width="160px"
+		        android:layout_height="wrap_content"
+		        android:layout_x="202px"
+		        android:layout_y="322px"
+		        android:textColor="#ffffff"
+		        android:textSize="22px" 
+		        android:gravity="center_horizontal"
+		        android:text="注浆工艺传输"
+		        /> 
+		
+		    <ImageButton
+		        android:id="@+id/data_collect_id"
+		        android:layout_width="160px"
+		        android:layout_height="170px"
+		        android:layout_x="425px"
+		        android:layout_y="141px"
+		        android:background="@drawable/data_collect_nowords_icon" />
+		    
+		    <TextView 
+		        android:layout_width="160px"
+		        android:layout_height="wrap_content"
+		        android:layout_x="425px"
+		        android:layout_y="322px"
+		        android:textColor="#ffffff"
+		        android:textSize="22px" 
+		        android:gravity="center_horizontal"
+		        android:text="注浆数据采集"
+		        />
+		
+		    <ImageButton
+		        android:id="@+id/data_manager_id"
+		        android:layout_width="160px"
+		        android:layout_height="170px"
+		        android:layout_x="650px"
+		        android:layout_y="141px"
+		        android:background="@drawable/data_manager_nowords_icon" />
+		    
+		    <TextView 
+		        android:layout_width="160px"
+		        android:layout_height="wrap_content"
+		        android:layout_x="650px"
+		        android:layout_y="322px"
+		        android:textColor="#ffffff"
+		        android:textSize="22px" 
+		        android:gravity="center_horizontal"
+		        android:text="注浆数据管理"
+		        />
+		
+		    <ImageButton
+		        android:id="@+id/manual_id"
+		       android:layout_width="160px"
+		        android:layout_height="170px"
+		        android:layout_x="320px"
+		        android:layout_y="404px"
+		        android:background="@drawable/manual_nowords_icon" />
+		    
+		    <TextView 
+		        android:layout_width="160px"
+		        android:layout_height="wrap_content"
+		        android:layout_x="320px"
+		        android:layout_y="585px"
+		        android:textColor="#ffffff"
+		        android:textSize="22px" 
+		        android:gravity="center_horizontal"
+		        android:text="操作手册"
+		        />
+		
+		    <ImageButton
+		        android:id="@+id/admin_id"
+		        android:layout_width="160px"
+		        android:layout_height="170px"
+		        android:layout_x="544px"
+		        android:layout_y="404px"
+		        android:background="@drawable/cloud_icon" />
+		    
+		    <TextView 
+		        android:layout_width="160px"
+		        android:layout_height="wrap_content"
+		        android:layout_x="544px"
+		        android:layout_y="585px"
+		        android:textColor="#ffffff"
+		        android:textSize="22px" 
+		        android:gravity="center_horizontal"
+		        android:text="云服务"
+		        />
+</AbsoluteLayout>
+		

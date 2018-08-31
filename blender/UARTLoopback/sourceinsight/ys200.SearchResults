@@ -1,0 +1,78 @@
+---- ConstDef Matches (77 in 18 files) ----
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_SUBPROJECTPOINT_GROUTING_DATA_SYNCTIME)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECTPOINT_GROUTING_DATA)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_SUBPROJECTPOINT_SYNCTIME)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECTPOINT)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_SUBPROJECTPOINT_SYNCTIME)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECTPOINT)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_IMAGES_SYNCTIME)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_IMAGES)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_SUBPROJECTSECTION_SYNCTIME)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECTSECTION)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECTSECTION)) + "&pageIndex=" + pageIndex, header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_SUBPROJECT_SYNCTIME)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECT)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_SUBPROJECT_SYNCTIME)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_SUBPROJECT)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_CONTRACTSECTION_SYNCTIME)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_CONTRACTSECTION)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util)://						ConstDef.KEY_SHAREPREF_CONTRACTSECTION_SYNCTIME)), header);
+ApiClient.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    					ConstDef.SYNCTIME_TYPE_CONTRACTSECTION)), header);
+CloudsMainActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):import com.ysdata.blender.cloud.util.ConstDef;
+CloudsMainActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):			boolean ret_delDir = mFileOperator.DeleteAllDir(extsdcard_dir+"/"+ConstDef.PROJECT_NAME) &&
+ConstDef.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):public class ConstDef {
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):import com.ysdata.blender.cloud.util.ConstDef;
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):    		String sync_time = synctimebase.getSyncTime(ConstDef.SYNCTIME_TYPE_CONTRACTSECTION);
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):    					String database_path = ExtSdCheck.getExtSDCardPath() + ConstDef.DATABASE_PATH;
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		    					AppUtil.log("synctime=============="+synctimebase.getSyncTime(ConstDef.SYNCTIME_TYPE_CONTRACTSECTION));
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		    					synctimebase.saveSyncTime(ConstDef.SYNCTIME_TYPE_CONTRACTSECTION, 
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		    					AppUtil.log("synctime=============="+synctimebase.getSyncTime(ConstDef.SYNCTIME_TYPE_CONTRACTSECTION));
+ContractSectionListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):					synctimebase.saveSyncTime(ConstDef.SYNCTIME_TYPE_CONTRACTSECTION, "2010-01-01 00:00:00");
+DrawImageGridViewActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):        	String image_path =  extSdPath+"/"+ConstDef.PROJECT_NAME+"/draw/image_demo/";
+DrawImageGridViewActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):						ConstDef.PROJECT_NAME+"/draw/image_demo/Â·¾¶ÏÂ¼ÓÔØÊ¾ÀýÍ¼Æ¬,ÇëµÈ´ý......", true, false);
+FileOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		File db_dir = new File(ExtSDpath +ConstDef.DATABASE_PATH);
+FileOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		File db_proj_dir = new File(ExtSDpath + ConstDef.DATABASE_PATH+proj_val);
+FileOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		String proj_path = ExtSDpath + ConstDef.DATABASE_PATH+proj_val;
+FileOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		String proj_path = ExtSDpath + ConstDef.DATABASE_PATH+proj_val;
+ManagerCraftFileActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):import com.ysdata.blender.cloud.util.ConstDef;
+ManagerCraftFileActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		return ExtSdCheck.getExtSDCardPath()+ConstDef.DATABASE_PATH+project_id+"/"+subproject_id+"/picture/picture_"+mix_id+"_1.png";
+ManagerCraftFileActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		return ExtSdCheck.getExtSDCardPath()+ConstDef.DATABASE_PATH+project_id+"/"+subproject_id+"/picture/picture_"+mix_id+"_2.png";
+ProjectDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):import com.ysdata.blender.cloud.util.ConstDef;
+ProjectDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):			String dir = ExtSDpath + "/" + ConstDef.PROJECT_NAME + "/database";
+ProjectDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):    	String database_path = ExtSdCheck.getExtSDCardPath() + ConstDef.DATABASE_PATH;
+ProjectDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):    	String database_path = ExtSdCheck.getExtSDCardPath() + ConstDef.DATABASE_PATH;
+ProjectPointDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):import com.ysdata.blender.cloud.util.ConstDef;
+ProjectPointDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):			String dir = ExtSDpath + ConstDef.DATABASE_PATH+project_id+"/"+subproject_id;
+ProjectPointDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):					mDb.setVersion(ConstDef.DB_VERSION);
+ProjectPointDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):					if (dbVer < ConstDef.DB_FIRST_VERSION) {
+ProjectPointDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):					if (dbVer < ConstDef.DB_VERSION) {
+ProjectTreeListView.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):import com.ysdata.blender.cloud.util.ConstDef;
+ProjectTreeListView.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):						String dir = extSdPath + ConstDef.DATABASE_PATH+project_id+"/"+subproject_id;
+ProjNameListDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):			String dir = ExtSDpath + ConstDef.DATABASE_PATH;
+RecoveryConfirmActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):			boolean ret_delDir = mFileOperator.DeleteAllDir(ext_ang_dir+"/"+ConstDef.PROJECT_NAME) &&
+SdBroadCastReceiver.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\storage):		String PKG_NAME = ConstDef.PKG_NAME;
+SetCraftDrawPictureActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):import com.ysdata.blender.cloud.util.ConstDef;
+SetCraftDrawPictureActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):			String image_path =  sdcarddir+"/"+ConstDef.PROJECT_NAME+"/draw/image_demo/";
+SetCraftDrawPictureActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		File path = new File(extSdPath+ConstDef.DATABASE_PATH+proj_val+"/"+eng_val+"/picture/");
+SetCraftDrawPictureActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		return extSdPath+ConstDef.DATABASE_PATH+proj_val+"/"+eng_val+"/picture/"+"picture_"+mileage_number+".png";
+SetCraftDrawPictureActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		File path = new File(extSdPath+ConstDef.DATABASE_PATH+proj_val+"/"+eng_val+"/picture_normal/");
+SetCraftDrawPictureActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		return extSdPath+ConstDef.DATABASE_PATH+proj_val+"/"+eng_val+"/picture_normal/"+"picture_"+mileage_number+".png";
+SharedView.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\cloud\util):    	if (CacheManager.getNetErrorMsg().equals(ConstDef.EXPIRED_RESPONSE_STRING)) {
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):import com.ysdata.blender.cloud.util.ConstDef;
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		shareEditor.remove(ConstDef.KEY_SHAREPREF_CONTRACTSECTION_SYNCTIME);
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		shareEditor.remove(ConstDef.KEY_SHAREPREF_SUBPROJECT_SYNCTIME);
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		shareEditor.remove(ConstDef.KEY_SHAREPREF_SUBPROJECTPOINT_GROUTING_DATA_SYNCTIME);
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		shareEditor.remove(ConstDef.KEY_SHAREPREF_SUBPROJECTPOINT_SYNCTIME);
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		shareEditor.remove(ConstDef.KEY_SHAREPREF_SUBPROJECTSECTION_SYNCTIME);
+SharePrefOperator.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):		shareEditor.remove(ConstDef.KEY_SHAREPREF_IMAGES_SYNCTIME);
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):import com.ysdata.blender.cloud.util.ConstDef;
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):    		String sync_time = synctimebase.getSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECT);
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):    					String database_path = ExtSdCheck.getExtSDCardPath() + ConstDef.DATABASE_PATH;
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		    					AppUtil.log("synctime=============="+synctimebase.getSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECT));
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		    					synctimebase.saveSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECT, apiClient.getCurrentDateTime());
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):		    					AppUtil.log("synctime=============="+synctimebase.getSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECT));
+SubProjectListActivity.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\activity):					synctimebase.saveSyncTime(ConstDef.SYNCTIME_TYPE_SUBPROJECT, "2010-01-01 00:00:00");
+SyncTimeDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):import com.ysdata.blender.cloud.util.ConstDef;
+SyncTimeDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):			String dir = ExtSDpath + ConstDef.DATABASE_PATH;
+SyncTimeDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):    	if (synctime_type == ConstDef.SYNCTIME_TYPE_CONTRACTSECTION) {
+SyncTimeDataBaseAdapter.java (c:\users\tony\desktop\½Á°è»ú\uartloopback\src\com\ysdata\blender\database):    	} else if (synctime_type == ConstDef.SYNCTIME_TYPE_SUBPROJECT) {
