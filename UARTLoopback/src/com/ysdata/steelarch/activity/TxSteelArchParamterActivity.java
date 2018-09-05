@@ -50,7 +50,7 @@ public class TxSteelArchParamterActivity extends Activity{
 	private static final int CLICK_END_STEELARCH_EVENT = 2;
 	int click_event = 0;
 	
-	private boolean sendStatus = true;
+	private boolean sendStatus = false;
 	private boolean devConnectStatus = true;
 	int tx_end_steelarch_orderno = 0;
 
@@ -94,35 +94,39 @@ public class TxSteelArchParamterActivity extends Activity{
 	
     private BroadcastReceiver SendParamReceiver = new BroadcastReceiver() {
     	public void onReceive(Context context, Intent intent) {
-    		sendStatus = true;
     		String action = intent.getAction();
     		if (action.equals(Format.SUCCESS_SEND_DATA)) {
     			
     		} else if (action.equals(Format.FAILED_SEND_DATA)) {
-    			
+    			sendStatus = false;
     		} else if (action.equals(Format.SUCCESS_SEND_SYSTEM_INFO)) {
     			text_status.setText("成功发送工程名称及系统时间");
     		} else if (action.equals(Format.FAILED_SEND_SYSTEM_INFO)) {
     			text_status.setText("接收到工程名称及系统时间的非应答信号");
+    			sendStatus = false;
     		} else if (action.equals(Format.RECEIVE_SYSTEM_INFO_ACK_TIMEOUT)) {
     			text_status.setText("未接收到工程名称及系统时间的应答信号");
+    			sendStatus = false;
     		} else if (action.equals(Format.RECEIVE_STEELARCH_PARAM_ACK_TIMEOUT)) {
     			Toast.makeText(context, "接收钢拱架参数的应答信号超时！", Toast.LENGTH_SHORT).show();
+    			sendStatus = false;
     		} else if (action.equals(Format.DEVICE_CONNECTION_LOST)) {
     			dev_connect_status_tv.setText("通信设备已断开");
     			devConnectStatus = false;
+    			sendStatus = false;
     		} else if (action.equals(Format.RECEIVE_DATA_TIMEOUT)) {
-    			sendStatus = true;
+    			sendStatus = false;
     			Toast.makeText(context, "数据接收超时！", Toast.LENGTH_SHORT).show();
     		} else if (action.equals(Format.SUCCESS_CONNECT_INTERNET)) {
     			text_status.setText("已接收到控制面板联网请求");
     		} else if (action.equals(Format.SENDING_PARAM)) {
     			String name = intent.getStringExtra("name");
-			int orderno = intent.getIntExtra("orderno", 0);	
-    			dev_connect_status_tv.setText("正在传送钢拱架参数到控制器，序号:" + orderno + ",编号:" + name);
+    			int orderno = intent.getIntExtra("orderno", 0);	
+				text_status.setText("正在传送钢拱架参数到控制器，序号:" + orderno + ",编号:" + name);
     		} else if (action.equals(Format.SEND_DATA_FINISH)) {
     			text_status.setText("数据传输结束");
     			mProjectPointBase.updateSendEndSteelArch(tx_end_steelarch_orderno);
+    			sendStatus = false;
     		} else if (action.equals(Format.ACTION_SEND_MILEAGE_NAME)) {
     			String mileage_name = intent.getStringExtra("sectionName");
     			if (click_event == CLICK_START_STEELARCH_EVENT) {
@@ -355,6 +359,8 @@ public class TxSteelArchParamterActivity extends Activity{
 									uartControlSender = new UartControlSender(context, mHandler, mProjectPointBase);
 									uartControlSender.setInstance(uartControlSender);
 									uartControlSender.start();
+									
+									sendStatus = true;
 									
 									Intent intent = new Intent(Format.SEND_CONTROL_DATA);
 									intent.putExtra("steelarch_start_orderno", steelarch_start_orderno);

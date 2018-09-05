@@ -1001,41 +1001,56 @@ public class UartPanelService {
 										//钢拱架间距
 										byte[] measure_distance_arr = new byte[64];
 										int measure_distance_len = recv_data[index++];
+										AppUtil.log("measure_distance_len--------" + measure_distance_len);
 //										measure_distance_len = 4;
 										for (int i = 0; i < measure_distance_len; i++) {
 											measure_distance_arr[i] = (byte) recv_data[index++];
 										}
-										String measure_distance_string = "";
-										measure_distance_string = new String(measure_distance_arr, 0, measure_distance_len, "GBK");
 										
-										double measure_distance = Double.parseDouble(measure_distance_string);
-										AppUtil.log("mmeasure_distance:"+measure_distance);
+										String measure_distance_string = "";
+										double measure_distance = 0;
+										if (measure_distance_len > 0) {
+											measure_distance_string = new String(measure_distance_arr, 0, measure_distance_len, "GBK");
+											
+											measure_distance = Double.parseDouble(measure_distance_string);
+											AppUtil.log("mmeasure_distance:"+measure_distance);
+										}
 										
 										//掌子面距离
 										byte[] tunnelface_distance_arr = new byte[64];
 										int tunnelface_distance_len = recv_data[index++];
+										AppUtil.log("tunnelface_distance_len--------" + tunnelface_distance_len);
 //										measure_distance_len = 4;
 										for (int i = 0; i < tunnelface_distance_len; i++) {
 											tunnelface_distance_arr[i] = (byte) recv_data[index++];
 										}
 										String tunnelface_distance_string = "";
-										tunnelface_distance_string = new String(tunnelface_distance_arr, 0, measure_distance_len, "GBK");
-										
-										double tunnelface_distance = Double.parseDouble(tunnelface_distance_string);
-										AppUtil.log("tunnelface_distance:"+tunnelface_distance);										
+										double tunnelface_distance = 0;
+										if (tunnelface_distance_len > 0) {
+											tunnelface_distance_string = new String(tunnelface_distance_arr, 0, tunnelface_distance_len, "GBK");
+											
+											tunnelface_distance = Double.parseDouble(tunnelface_distance_string);
+											AppUtil.log("tunnelface_distance:"+tunnelface_distance);										
+										}
 
 										//二次模板台车距离
 										byte[] secondcar_distance_arr = new byte[64];
 										int secondcar_distance_len = recv_data[index++];
+										AppUtil.log("secondcar_distance_len--------" + secondcar_distance_len);
 //										measure_distance_len = 4;
 										for (int i = 0; i < secondcar_distance_len; i++) {
 											secondcar_distance_arr[i] = (byte) recv_data[index++];
 										}
 										String secondcar_distance_string = "";
-										secondcar_distance_string = new String(secondcar_distance_arr, 0, secondcar_distance_len, "GBK");
+										double secondcar_distance = 0;
 										
-										double secondcar_distance = Double.parseDouble(secondcar_distance_string);
-										AppUtil.log("secondcar_distance:"+secondcar_distance);		
+										if (secondcar_distance_len > 0) {
+											secondcar_distance_string = new String(secondcar_distance_arr, 0, secondcar_distance_len, "GBK");
+											
+											secondcar_distance = Double.parseDouble(secondcar_distance_string);
+											AppUtil.log("secondcar_distance:"+secondcar_distance);		
+										}
+										
 										
 										isLeft = (byte) recv_data[index++] == 0 ? true : false;
 										
@@ -1164,10 +1179,10 @@ public class UartPanelService {
 								}
 							} else if (cmd == Format.CMD_STEELARCH_COMM_STOP) {
 								AppUtil.log( "recv CMD_RECEV_STOP");
+								sendAck(cmd); //接收到正确数据，发送数据接收应答
 								if (mProjectPointBase.openDb(proj_val, eng_val)) {
 									mProjectPointBase.setSteelArchOrderNo();
 								}
-								sendAck(cmd); //接收到正确数据，发送数据接收应答
 								context.sendBroadcast(new Intent(Format.STEELARCH_COMM_FINISH));
 								try {
 									Thread.sleep(2000);

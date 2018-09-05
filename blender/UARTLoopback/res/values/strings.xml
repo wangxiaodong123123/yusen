@@ -81,9 +81,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     
-    <string name="version_number">当前版本:YS200-Blender-V20180711</string>
+    <string name="version_number">当前版本:YS200-Blender-V20180901</string>
     <string name="update_info">更新日志:
-        \n1 修改搅拌时间全为1439的问题。
+        \n1 修复usb accessary的状态为未连接
         \n2 
      	</string>
 

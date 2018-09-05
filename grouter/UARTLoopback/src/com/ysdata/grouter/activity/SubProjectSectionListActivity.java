@@ -60,7 +60,7 @@ public class SubProjectSectionListActivity extends Activity {
 	int subproject_id, project_id;
 	TextView user_info_tv;
 	Button reload_bt;
-	boolean isLoading = true;
+	boolean isLoading = false;
 	int mileage_count = 0;
 	int subproject_direction = 1;
 	private Activity activity;
@@ -1008,6 +1008,7 @@ public class SubProjectSectionListActivity extends Activity {
 	class ReloadClickListener implements android.view.View.OnClickListener {
 		@Override
 		public void onClick(View v) {
+			AppUtil.log("isLoading----------------" + isLoading);
 			if (isLoading) return;
 			boolean doAllUpload = mProjectPointBase.doAllGroutingPointUpload();
 			String msg = "";

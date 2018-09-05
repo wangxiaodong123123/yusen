@@ -39,6 +39,8 @@ public class MainActivity  extends Activity {
 	private final static int UART_NOT_CONNECT = 1;
 	private final static int UART_CONNECTED = 2;
 	private int uart_status;
+	boolean threadStop = false;
+	UsbAccessoryThread usbAccessoryThread;
 	public FT311UARTDeviceManager uartInterface;
     
     @Override
@@ -67,7 +69,27 @@ public class MainActivity  extends Activity {
     		uart_status = UART_CONNECTED;
     	} else {
     		uart_status = UART_NOT_CONNECT;
+    		usbAccessoryThread = new UsbAccessoryThread();
+    		usbAccessoryThread.start();
     	}
+    }
+    
+    class UsbAccessoryThread extends Thread {
+    	public void run() {
+			int retry = 0;
+			while(retry++ < 10) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if (uartInterface.accessory_attached) {
+					uart_status = UART_CONNECTED;
+					break;
+				}
+				if (threadStop) break;
+			}
+		};
     }
     
     private void dataBaseSelfTest() {
@@ -144,7 +166,7 @@ public class MainActivity  extends Activity {
 				if (extSdPath == null) {
 					Toast.makeText(context, "Î´¼ì²âµ½ÍâÖÃsd¿¨", Toast.LENGTH_SHORT).show();
 				} else {
-					uart_status = UART_CONNECTED;
+//					uart_status = UART_CONNECTED;
 					if (uart_status == UART_CONNECTED) {
 						Intent intent=new Intent(MainActivity.this, TxMixParamterActivity.class);
 						startActivity(intent);
@@ -161,7 +183,7 @@ public class MainActivity  extends Activity {
 				if (extSdPath == null) {
 					Toast.makeText(context, "Î´¼ì²âµ½ÍâÖÃsd¿¨", Toast.LENGTH_SHORT).show();
 				} else {
-					uart_status = UART_CONNECTED;
+//					uart_status = UART_CONNECTED;
 					if (uart_status == UART_CONNECTED) {
 						Intent intent=new Intent(MainActivity.this, RxMixParamterActivity.class);
 						startActivity(intent);
@@ -246,6 +268,14 @@ public class MainActivity  extends Activity {
     	if (synctimebase != null)
     		synctimebase.closeDb();
     	LogFileManager.close();
+    	if (usbAccessoryThread.isAlive()) {
+    		threadStop = true;
+    		try {
+				usbAccessoryThread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    	}
     	uartInterface.DestroyAccessory(true);
     	MyActivityManager.removeActivity(MainActivity.this);
     	super.onDestroy();

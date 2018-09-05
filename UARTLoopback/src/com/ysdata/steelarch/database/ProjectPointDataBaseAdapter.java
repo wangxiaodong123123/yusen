@@ -212,14 +212,14 @@ public class ProjectPointDataBaseAdapter {
     			STEELARCH_DATA_TABLE + " order by " + NAME_TO_METER + " asc" , null);
     	int orderno = 1;
     	mDb.beginTransaction();
-    	AppUtil.log("===========setSteelArchCraftOrderNo===============");
+    	AppUtil.log("===========setSteelArchCraftOrderNo start===============");
     	ContentValues value = new ContentValues();
     	while (cursor.moveToNext()) {
     		value.put(STEELARCH_ORDERNO, orderno);
     		mDb.update(STEELARCH_DATA_TABLE, value, STEELARCH_ID + "=" + cursor.getInt(0), null);
     		orderno++;
     	} 
-    	AppUtil.log("===========setSteelArchCraftOrderNo===============");
+    	AppUtil.log("===========setSteelArchCraftOrderNo end===============");
     	mDb.setTransactionSuccessful(); 
         mDb.endTransaction(); 
     	if (cursor != null) {

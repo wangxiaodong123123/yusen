@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ysdata.grouter"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="15" />
+
+    <application android:icon="@drawable/logo" android:label="@string/application_name">
+		<receiver android:name="com.ysdata.grouter.storage.SdBroadCastReceiver">  
+		    <intent-filter android:priority="1000">  
+		        <action android:name="android.intent.action.MEDIA_MOUNTED"/>  
+		        <action android:name="android.intent.action.MEDIA_EJECT" />  
+		        <data android:scheme="file"/>  
+		    </intent-filter>  
+		</receiver>  
+        
+	    <activity android:name="com.ysdata.grouter.activity.MainActivity" android:screenOrientation="landscape"
+	        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+	        <intent-filter android:label="@string/application_name">
+	            <action android:name="android.intent.action.MAIN" />
+	            <category android:name="android.intent.category.LAUNCHER" />
+	        </intent-filter>
+           <intent-filter>
+               <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
+            </intent-filter>
+            <meta-data 
+            	android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+            	android:resource="@xml/accessory_filter">
+            </meta-data>	        
+	    </activity>    
+        <activity
+          	android:name="com.ysdata.grouter.activity.DeviceListActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>
+        <activity
+          	android:name="com.ysdata.grouter.activity.CollectPanelActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>
+        <activity
+          	android:name="com.ysdata.grouter.activity.SetMainListActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  		  
+        <activity
+          	android:name="com.ysdata.grouter.activity.SetInputContractionSectionActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  
+		<activity
+          	android:name="com.ysdata.grouter.activity.SetInputEngActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  
+         <activity
+          	android:name="com.ysdata.grouter.activity.ContractSectionListActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  
+         <activity
+          	android:name="com.ysdata.grouter.activity.SubProjectListActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>     	  	
+         <activity
+          	android:name="com.ysdata.grouter.activity.AdminMainListActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>     
+        <activity
+          	android:name="com.ysdata.grouter.activity.InputAdminPasswordActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  	 	      	   
+    	<activity
+          	android:name="com.ysdata.grouter.activity.CraftFilePageActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>        	
+        <activity
+          	android:name="com.ysdata.grouter.activity.SetCraftDrawPictureActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>   
+		<activity
+          	android:name="com.ysdata.grouter.activity.ManagerCraftFileActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>          	
+        <activity
+          	android:name="com.ysdata.grouter.activity.MgrAnchorStatisticsActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  
+        <activity
+          	android:name="com.ysdata.grouter.activity.MgrOneAnchorRecordActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>   
+        <activity
+          	android:name="com.ysdata.grouter.activity.ManualActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	 
+        <activity
+          	android:name="com.ysdata.grouter.activity.CraftFileTransferActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	 		
+        <activity
+          	android:name="com.ysdata.grouter.activity.CollectSingelCardActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	  	
+		<activity
+          	android:name="com.ysdata.grouter.activity.RecoveryConfirmActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	
+        <activity
+          	android:name="com.ysdata.grouter.activity.DrawImageGridViewActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	
+        <activity
+          	android:name="com.ysdata.grouter.activity.AccountActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	   	 	
+         <activity
+          	android:name="com.ysdata.grouter.activity.CloudsMainActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/> 		
+         <activity
+          	android:name="com.ysdata.grouter.activity.WebViewActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/> 	 
+         <activity
+          	android:name="com.ysdata.grouter.activity.UploadGroutingPointActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>  
+         <activity
+          	android:name="com.ysdata.grouter.activity.SubProjectSectionListActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>
+         <activity
+          	android:name="com.ysdata.grouter.activity.MileageGridViewActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>	
+          <activity
+          	android:name="com.ysdata.grouter.activity.UploadMileageGridViewActivity"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>		
+          <activity
+          	android:name="com.ysdata.grouter.activity.ProjectTreeListView"
+          	android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+          	android:screenOrientation="landscape"
+          	/>		
+          <service android:name="com.ysdata.grouter.service.ListenNetStateService" />  
+    </application>
+    <uses-feature android:name="android.hardware.usb.accessory"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> 
+    <uses-permission android:name="android.permission.BLUETOOTH" />  
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> 
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

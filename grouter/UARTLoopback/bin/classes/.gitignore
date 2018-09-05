@@ -1,8 +1,2 @@
-/android-pdfview-1.0.2.jar
-/android-support-v4.jar
-/armeabi
 /com
-/glide-3.7.0.jar
-/gson-1.6.jar
-/okhttp-3.2.0.jar
-/okio-1.6.0.jar
+/.gitignore
