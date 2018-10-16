@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import com.ysdata.grouter.R;
-import com.ysdata.grouter.cloud.api.BooleanResponse;
 import com.ysdata.grouter.cloud.api.PointGroutingDataUploadListResponse;
 import com.ysdata.grouter.cloud.util.ApiClient;
 import com.ysdata.grouter.cloud.util.AppUtil;

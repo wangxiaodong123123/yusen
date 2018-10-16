@@ -611,6 +611,7 @@ public class ProjectPointDataBaseAdapter {
     			}
     		}
     	}
+    	if (cursor != null) cursor.close();
     	if (hasDownGroutPoints_unupload) { //存在未上传的下坑道数据
     		if (hasUpGroutPoints_upload && !hasUpGroutPoints_unupload) { //上坑道注浆数据已上传
     			ret = 3; //下坑道未上传
@@ -635,11 +636,18 @@ public class ProjectPointDataBaseAdapter {
     	String mileageName;
     	int uploadState;
 //    	AppUtil.log("=======getMileageUploadStateList========");
+    	long startTime, endTime;
+    	startTime = System.currentTimeMillis();
+    	//mDb.beginTransaction();
     	while(cursor.moveToNext()) {
     		mileageName = cursor.getString(VOLUME_MILEAGE_NAME);
     		uploadState = getMileageUploadState(cursor.getInt(VOLUME_MILEAGE_ID));
     		list.add(new MileageUploadState(mileageName, uploadState));
     	}
+    	//mDb.setTransactionSuccessful();
+    	//mDb.endTransaction();
+    	endTime = System.currentTimeMillis();
+    	AppUtil.log( "excute getMileageUploadStateList time:"+(endTime - startTime)+"(ms)");
     	if (cursor != null)
     		cursor.close();
     	return list;
@@ -654,6 +662,7 @@ public class ProjectPointDataBaseAdapter {
     		if (uploadState == 0)
     			break;
     	}
+    	if (cursor != null) cursor.close();
     	return uploadState == 1 ? true : false;
     }
 
@@ -1230,7 +1239,7 @@ public class ProjectPointDataBaseAdapter {
 	    				design_hold_time, practice_hold_time, mgr_remark, 0);
 	    		CacheManager.setDesignHoldTime(design_hold_time);
 	    	}
-	    	cursor.close();
+	    	if (cursor != null) cursor.close();
 			return mManagerCraftParameter;
 	    }    
 	
@@ -1262,7 +1271,7 @@ public class ProjectPointDataBaseAdapter {
     				design_hold_time, practice_hold_time, mgr_remark, 0);
     		CacheManager.setDesignHoldTime(design_hold_time);
     	}
-    	cursor.close();
+    	if (cursor != null) cursor.close();
 		return mManagerCraftParameter;
     }
     
@@ -1308,7 +1317,7 @@ public class ProjectPointDataBaseAdapter {
     			}
     		}
     	}
-    	cursor.close();
+    	if (cursor != null) cursor.close();
 		return list;
     }
     
